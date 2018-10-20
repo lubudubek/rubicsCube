@@ -8,9 +8,9 @@ class Texture
 private:
 	unsigned int m_rendererId;
 	std::string m_filePath;
-	int m_width, m_height, m_BPP;
 	unsigned char* m_localBuffer;
-
+	int m_width, m_height, m_BPP;
+	
 public:
 	Texture(const std::string& filePath);
 	~Texture();
@@ -20,5 +20,4 @@ public:
 
 	inline int GetWidth() const { return m_width; };
 	inline int GetHeight() const { return m_height; };
-
 };
