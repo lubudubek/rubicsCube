@@ -17,9 +17,11 @@
 #include "Test/TestClearColor.hpp"
 #include "Test/MyTexturePtrs.hpp"
 #include "Test/MyTextureTest.hpp"
-#include "Test/Kostka.hpp"
+#include "Test/CubeTest.hpp"
 #include "Test/Test.hpp"
 #include "Test/CubicTransformations.hpp"
+
+void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 int main() {
 	if (!glfwInit()) {
@@ -33,9 +35,11 @@ int main() {
 		glfwTerminate();
 		return 1;
 	}
+	
+	glfwSetKeyCallback(window, keyCallBack);
 
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(2);
+	glfwSwapInterval(1);
 	glewExperimental = GL_TRUE;
 	glewInit();
 
@@ -61,8 +65,7 @@ int main() {
 	testMenu->RegisterTest<test::TestClearColor>("Clear Color");
 	testMenu->RegisterTest<test::MyTextureTest>("my texture test");
 	testMenu->RegisterTest<test::MyTexturePtrs>("my texture ptrs");
-	testMenu->RegisterTest<test::Cube>("kostka");
-
+	testMenu->RegisterTest<test::CubeTest>("kostka");
 
 	while (!glfwWindowShouldClose(window)) {
 		render.Clear();
@@ -78,6 +81,7 @@ int main() {
 				delete currentTest;
 				currentTest = testMenu;
 			}
+			
 			currentTest->OnImGuiRenderer();
 			ImGui::End();
 		}
@@ -95,4 +99,9 @@ int main() {
 
 	glfwTerminate();
 	return 1;
+}
+
+void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	std::cout << "key: " << key << ", scancode: " << scancode << ", action: " << action << ", mods: " << mods;
 }

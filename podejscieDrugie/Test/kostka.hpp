@@ -6,6 +6,8 @@
 #include "shader.hpp"
 #include "Texture.hpp"
 #include <memory>
+#include "CubicTransformations.hpp"
+
 
 namespace test
 {
@@ -31,17 +33,25 @@ namespace test
 		std::shared_ptr<VertexBufferLayout> m_layout;
 		std::shared_ptr<Shader> m_shader;
 		std::shared_ptr<Texture> m_texture;
+
 		float m_fovy;
 		float m_fovy1;
 		float m_fovy2;
 
 		float m_rotation_x;
 		float m_rotation_y;
+		float m_rotateY;
 		float m_rotateX;
+		int direction;
+		bool isAnimationOngoing;
+		float tempAngle;
+		CubicTransformations cubicMvps;
+
 
 		void setIndecies();
 		void setPoints();
 		void setCubePoints();
-
+		void checkKeys();
+		void Animate(CubicTransformations& cubiMvp);
 	};
 }

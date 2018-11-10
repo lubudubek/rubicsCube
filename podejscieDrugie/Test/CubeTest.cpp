@@ -1,14 +1,16 @@
-#include "Kostka.hpp"
+#include "CubeTest.hpp"
 #include "renderer.hpp"
 #include "GL/glew.h"
 #include "imgui/imgui.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/glm.hpp"
+#include <corecrt_math_defines.h>
+//#define _USE_MATH_DEFINES
 
 namespace test
 {
 
-	Cube::Cube()
+	CubeTest::CubeTest()
 		:	m_translationA(0.0f, 0.0f, -3.0f),
 			m_translationB(0.0f, 0.0f, -6.0f),
 			m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
@@ -46,18 +48,18 @@ namespace test
 		isAnimationOngoing = false;
 	}
 
-	Cube::~Cube()
+	CubeTest::~CubeTest()
 	{
 
 
 	}
 
-	void Cube::OnUpdate(float deltaTime)
+	void CubeTest::OnUpdate(float deltaTime)
 	{
 
 	}
 
-	void Cube::OnRenderer()
+	void CubeTest::OnRenderer()
 	{
 		Renderer render;
 		{
@@ -89,7 +91,7 @@ namespace test
 		}
 	}
 
-	void Cube::OnImGuiRenderer()
+	void CubeTest::OnImGuiRenderer()
 	{
 			ImGui::SliderFloat3("Translation A", &m_translationA.x, -10.0f, 10.0f);
 			ImGui::SliderFloat3("Translation B", &m_translationB.x, -10.0f, 10.0f);
@@ -103,14 +105,10 @@ namespace test
 			ImGui::SliderFloat("Rotate y", &m_rotateY, -8.0f, 8.0f);
 			ImGui::SliderFloat("Rotate x", &m_rotateX, -8.0f, 8.0f);
 
-
-
-
-
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 
-	void Cube::setPoints()
+	void CubeTest::setPoints()
 	{
 		int i = 24;
 		m_points = new float[i]{
@@ -121,7 +119,7 @@ namespace test
 		};
 	}
 
-	void Cube::setCubePoints()
+	void CubeTest::setCubePoints()
 	{
 		int i = 7 * 4 * 6;
 		m_points = new float[i] {
@@ -157,7 +155,7 @@ namespace test
 		};
 	}
 
-	void Cube::setIndecies()
+	void CubeTest::setIndecies()
 	{
 		int i = 3*12;
 		unsigned int* indecies = new unsigned int[i]{
@@ -179,7 +177,7 @@ namespace test
 		m_indecies = indecies;
 	}
 
-	void Cube::checkKeys()
+	void CubeTest::checkKeys()
 	{
 		if (isAnimationOngoing)
 		{
@@ -189,24 +187,24 @@ namespace test
 		{
 			std::cout << "Arrow Up Pressed" << std::endl;
 			direction = 1;
-			tempAngle = 1.57f;
-			m_rotateX = 0.01f;
+			tempAngle = M_PI / 2.0;
+			m_rotateX = M_PI / 20;
 			isAnimationOngoing = true;
 		}
 		if (ImGui::IsKeyPressed(264))
 		{
 			std::cout << "Arrow Down Pressed" << std::endl;
 			direction = 2;
-			tempAngle = 1.57f;
-			m_rotateX = -0.01f;
+			tempAngle = M_PI / 2.0;
+			m_rotateX = -M_PI / 20;
 			isAnimationOngoing = true;
 		}
 		if (ImGui::IsKeyPressed(262))
 		{
 			std::cout << "Arrow Right Pressed" << std::endl;
 			direction = 3;
-			tempAngle = 1.57f;
-			m_rotateY = 0.01f;
+			tempAngle = M_PI / 2.0;
+			m_rotateY = M_PI / 20;
 
 			isAnimationOngoing = true;
 		}
@@ -214,14 +212,14 @@ namespace test
 		{
 			std::cout << "Arrow Left Pressed" << std::endl;
 			direction = 4;
-			tempAngle = 1.57f;
-			m_rotateY = -0.01f;
+			tempAngle = M_PI / 2.0;
+			m_rotateY = -M_PI / 20;
 
 			isAnimationOngoing = true;
 		}
 	}
 
-	void Cube::Animate(CubicTransformations& cubiMvp)
+	void CubeTest::Animate(CubicTransformations& cubiMvp)
 	{
 		if (isAnimationOngoing)
 		{
@@ -229,47 +227,49 @@ namespace test
 			{
 			case 1:
 			{
-				
-				tempAngle -= 0.01f;	
+				//cubicMvps.RotateCenterXFull(direction);
 				//std::cout << "rotate X: " << m_rotateX;
-				if (tempAngle < 0.01)
+				if (tempAngle < M_PI / 20)
 				{
 					m_rotateX = 0.0f;
 					isAnimationOngoing = false;
 				}
+				tempAngle -= M_PI / 20;
 				break;
 			}
 			case 2:
 			{
-				tempAngle -= 0.01f;
 				//std::cout << "rotate X: " << m_rotateX;
-				if (tempAngle < 0.01)
+				if (tempAngle < M_PI / 20)
 				{
 					m_rotateX = 0.0f;
 					isAnimationOngoing = false;
 				}
+				tempAngle -= M_PI / 20;
 				break;
 			}
 			case 3:
 			{
-				tempAngle -= 0.01f;
+				
 				//std::cout << "rotate Y: " << m_rotateX;
-				if (tempAngle < 0.01)
+				if (tempAngle < M_PI / 20)
 				{
 					m_rotateY = 0.0f;
 					isAnimationOngoing = false;
 				}
+				tempAngle -= M_PI / 20;
 				break;
 			}
 			case 4:
 			{
-				tempAngle -= 0.01f;
+				
 				//std::cout << "rotate Y: " << m_rotateX;
-				if (tempAngle < 0.01)
+				if (tempAngle < M_PI / 20)
 				{
 					m_rotateY = 0.0f;
 					isAnimationOngoing = false;
 				}
+				tempAngle -= M_PI / 20;
 				break;
 			}
 			}
