@@ -38,20 +38,18 @@ namespace test
 		float m_fovy1;
 		float m_fovy2;
 
-		float m_rotation_x;
-		float m_rotation_y;
+		float m_translation_x;
+		float m_translation_y;
+		float m_translation_z;
+
 		float m_rotateY;
 		float m_rotateX;
 		int direction;
-		bool isAnimationOngoing;
 		double tempAngle;
 		CubicTransformations cubicMvps;
 
 
 		void setIndecies();
-		void setPoints();
 		void setCubePoints();
-		void checkKeys();
-		void Animate(CubicTransformations& cubiMvp);
 	};
 }

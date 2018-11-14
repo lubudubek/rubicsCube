@@ -35,14 +35,19 @@ enum class CubicType
 class CubicTransformations
 {
 public:
-	CubicTransformations();
+	CubicTransformations(float translationX, float translationY, float translationZ);
 	std::vector<glm::mat4> getTransformations();
 	void addCommonTrnasformation(const glm::mat4& commonTrnansformation);
-	void RotateCenterY(float angle);
-	void RotateCenterX(float angle);
 	void recalculatePosition(int direction);
+	void rotate(Rotation direction);
+	void update();
+
 
 private:
 	std::vector<Cubic> m_transformations;
 	glm::mat4 commonTrnansformation;
+	
+	float& m_translationX;
+	float& m_translationY;
+	float& m_translationZ;
 };

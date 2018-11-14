@@ -1,16 +1,8 @@
 #pragma once
 #include <vector>
 #include "glm/glm.hpp"
+#include "PositionSwitch.hpp"
 
-enum class Position
-{
-	FRONT,
-	BACK,
-	LEFT,
-	RIGHT,
-	BOTTOM,
-	TOP
-};
 
 class Cubic
 {
@@ -22,20 +14,30 @@ public:
 	Cubic(std::vector<Position>, glm::mat4);
 	glm::mat4 getTransformation() const;
 	void addTransformation(glm::mat4 addedTransformation);
-	//void recalculatePosition(int direction);
+	PositionSwitch m_positionSwitch;
 
 	glm::mat4 commonTransformation;
-	void rotateX(float angle);
-	void rotateY(float angle);
-	void rotateZ(float angle);
+	void rotateCenterX(float angle);
+	void rotateRightX(float angle);
+	void rotateLeftX(float angle);
 
-	float oldAngleX;
-	float oldAngleY;
-	float oldAngleZ;
+	void rotateCenterY(float angle);
+	void rotateTopY(float angle);
+	void rotateBottomY(float angle);
+
+	void rotateCenterZ(float angle);
+	void rotateFrontZ(float angle);
+	void rotateBackZ(float angle);
 
 	short countX;
 	short countY;
 	short coutnZ;
 
-	//void resetMatrix();
+	void startRotation(Rotation direction);
+	void rotateOnAxis(float angle, glm::vec3 axis);
+	double m_animationAngle;
+	Rotation m_direction;
+	void update();
+	bool isCubicOnAxis(Position rotatedPositions);
+	bool isCubicNotOnAxis(std::vector<Position> notRotatedPositions);
 };

@@ -1,30 +1,54 @@
 #include "CubicTransformations.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <algorithm>
-CubicTransformations::CubicTransformations()
+#include <corecrt_math_defines.h>
+
+CubicTransformations::CubicTransformations(float translationX, float translationY, float translationZ)
+	: m_translationX(translationX), m_translationY(translationY), m_translationZ(translationZ)
 {
-	m_transformations.push_back(Cubic({ Position::BACK }, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f))));
-	m_transformations.push_back(Cubic({ Position::FRONT }, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -1.0f))));
-	m_transformations.push_back(Cubic({ Position::TOP }, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
-	m_transformations.push_back(Cubic({ Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.0f, 0.0f))));
-	m_transformations.push_back(Cubic({ Position::RIGHT }, glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 0.0f, 0.0f))));
-	m_transformations.push_back(Cubic({ Position::LEFT }, glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f))));
+//CENTERS
+	m_transformations.push_back(Cubic({ Position::BACK },   glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  0.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT },  glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  0.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::TOP },    glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  1.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  0.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  0.0f,  0.0f))));
+
+//EDGES
+	m_transformations.push_back(Cubic({ Position::FRONT,  Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  0.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT,  Position::TOP },    glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT,  Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT,  Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  0.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,   Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  0.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,   Position::TOP },    glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,   Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,   Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  0.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f, -1.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::TOP,    Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  1.0f,  0.0f))));
+	m_transformations.push_back(Cubic({ Position::TOP,    Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  1.0f,  0.0f))));
+
+//CORNERS
+	m_transformations.push_back(Cubic({ Position::FRONT, Position::RIGHT, Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f, -1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT, Position::RIGHT, Position::TOP    }, glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT, Position::LEFT,  Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::FRONT, Position::LEFT,  Position::TOP    }, glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,  Position::RIGHT, Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f, -1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,  Position::RIGHT, Position::TOP    }, glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,  Position::LEFT,  Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BACK,  Position::LEFT,  Position::TOP    }, glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  1.0f, -1.0f))));
+
 
 	float m_fovy = 20.0f;
 	float m_fovy1 = 2.0f;
 	float m_fovy2 = 10.0f;
 	glm::vec3 m_translationB(0.0f, 0.0f, -6.0f);
+
 	glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
 	glm::mat4 proj = glm::perspective(m_fovy, float(4 / 3), m_fovy1, m_fovy2);
 
-	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), 0.8f, glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 commonTrnansformation = proj * model1 * rotationx;
-	//glm::mat4 transform1 = glm::inverse(transform);
-	//addCommonTrnasformation(transform);
-	//addCommonTrnasformation(transform1);
-	//RotateCenterY(0.5f);
-	//RotateCenterY(0.5f);
-	//RotateCenterY(0.5f);
 
 	addCommonTrnasformation(commonTrnansformation);
 
@@ -44,52 +68,19 @@ void CubicTransformations::addCommonTrnasformation(const glm::mat4& commonTrnans
 		transform.addTransformation(commonTrnansformation);
 }
 
-void CubicTransformations::RotateCenterY(float angle)
-{
-	for (auto& transform : m_transformations)
-		transform.rotateY(angle);
-	//m_transformations[CubicType::RIGHT] =
-	//	glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f)) * m_transformations[CubicType::RIGHT];
-	//m_transformations[CubicType::LEFT] =
-	//	glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f)) * m_transformations[CubicType::LEFT];
-	//m_transformations[CubicType::FRONT] =
-	//	glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f)) * m_transformations[CubicType::FRONT];
-	//m_transformations[CubicType::BACK] =
-	//	glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f)) * m_transformations[CubicType::BACK];
-
-	//if (angle > 1.57f or angle <-1.57f)
-	//{
-	//	glm::mat4 temp = m_transformations[CubicType::RIGHT];
-	//	m_transformations[CubicType::RIGHT] = m_transformations[CubicType::FRONT];
-	//	m_transformations[CubicType::FRONT] = m_transformations[CubicType::LEFT];
-	//	m_transformations[CubicType::LEFT] = m_transformations[CubicType::BACK];
-	//	m_transformations[CubicType::BACK] = temp;
-	//}
-
-
-}
-
-void CubicTransformations::RotateCenterX(float angle)
-{
-	for (auto& transform : m_transformations)
-		transform.rotateX(angle);
-	//m_transformations[CubicType::TOP] = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f)) * m_transformations[CubicType::TOP];
-	//m_transformations[CubicType::BOTTOM] = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f)) * m_transformations[CubicType::BOTTOM];
-	//m_transformations[CubicType::FRONT] = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f)) * m_transformations[CubicType::FRONT];
-	//m_transformations[CubicType::BACK] = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f)) * m_transformations[CubicType::BACK];
-
-	//if (angle > 1.57f or angle < -1.57f)
-	//{
-	//	glm::mat4 temp = m_transformations[CubicType::TOP];
-	//	m_transformations[CubicType::TOP] = m_transformations[CubicType::FRONT];
-	//	m_transformations[CubicType::FRONT] = m_transformations[CubicType::BOTTOM];
-	//	m_transformations[CubicType::BOTTOM] = m_transformations[CubicType::BACK];
-	//	m_transformations[CubicType::BACK] = temp;
-	//}
-}
-
 void CubicTransformations::recalculatePosition(int direction)
 {
-	//for (auto& transform : m_transformations)
-	//	transform.recalculatePosition(direction);
+
+}
+
+void CubicTransformations::rotate(Rotation direction)
+{
+	for (auto& transform : m_transformations)
+    	transform.startRotation(direction);
+}
+
+void CubicTransformations::update()
+{
+	for (auto& transform : m_transformations)
+		transform.update();
 }
