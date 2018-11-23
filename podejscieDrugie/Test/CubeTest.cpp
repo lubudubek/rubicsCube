@@ -12,14 +12,9 @@ namespace test
 {
 
 	CubeTest::CubeTest()
-		:	m_translationA(0.0f, 0.0f, -3.0f),
-			m_translationB(0.0f, 0.0f, -6.0f),
-			m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
+		:	m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 			m_view(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
-			m_translation_x(0.0f),
-	        m_translation_y(0.0f),
-			m_translation_z(0.0f),
-			cubicMvps(m_translation_x, m_translation_y, m_translation_z)
+			cubicMvps(m_onlineParams)
 	{
 		setCubePoints();
 		setIndecies();
@@ -32,7 +27,6 @@ namespace test
 		delete m_indecies;
 
 		m_shader = std::make_shared<Shader>("res/shaders/Cube.shader");
-		//m_texture = std::make_shared<Texture>("logo1.png");
 
 		m_layout = std::make_shared<VertexBufferLayout>();
 
@@ -41,21 +35,6 @@ namespace test
 		m_va->AddBuffer(*m_vb, *m_layout);
 
 		m_shader->Bind();
-
-		m_fovy = 20.0f;
-		m_fovy1 = 2.0f;
-		m_fovy2 = 10.0f;
-
-		m_translation_x = 0.0f;
-		m_translation_y = 0.0f;
-		m_translation_z = -6.0f;
-
-		
-		m_rotateY = 0.0f;
-		m_rotateX = 0.0f;
-		//m_shader->SetUniform1i("u_Texture", 0);
-
-		//m_texture->Bind();
 	}
 
 	CubeTest::~CubeTest()
@@ -73,21 +52,7 @@ namespace test
 	{
 		Renderer render;
 		{
-			//glm::mat4 model = glm::translate(glm::mat4(1.0f), m_translationA);
-			//glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), m_rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
-			//glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), m_rotation_y, glm::vec3(0.0f, 0.1f, 0.0f));
-			//glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
-
-			//glm::mat4 proj = glm::perspective(m_fovy, float(4 / 3), m_fovy1, m_fovy2);
-			//glm::mat4 mvp = m_proj * m_view * model;
-
-
 			cubicMvps.update();
-
-			//cubicMvps.RotateCenterX(m_rotateX);
-			//cubicMvps.RotateCenterY(m_rotateY);
-
-			//cubicMvps.addCommonTrnasformation(proj * model1 * rotationy * rotationx);
 			
 			m_shader->Bind();
 
@@ -103,19 +68,13 @@ namespace test
 
 	void CubeTest::OnImGuiRenderer()
 	{
-			ImGui::SliderFloat3("Translation A", &m_translationA.x, -10.0f, 10.0f);
-			ImGui::SliderFloat3("Translation B", &m_translationB.x, -10.0f, 10.0f);
+			ImGui::SliderFloat("Fovy", &m_onlineParams.fovy, 6.0f, 9.0f);
+			ImGui::SliderFloat("Fovy 1", &m_onlineParams.near, 1.5f, 2.5f);
+			ImGui::SliderFloat("Fovy 2", &m_onlineParams.far, -100.0f, 100.0f);
 
-			ImGui::SliderFloat("Fovy", &m_fovy, 0.0f, 30.0f);
-			ImGui::SliderFloat("Fovy 1", &m_fovy1, 0.0f, 30.0f);
-			ImGui::SliderFloat("Fovy 2", &m_fovy2, 0.0f, 30.0f);
-
-			ImGui::SliderFloat("Rotation x", &m_translation_x, -8.0f, 8.0f);
-			ImGui::SliderFloat("Rotation y", &m_translation_y, -8.0f, 8.0f);
-			ImGui::SliderFloat("Rotation z", &m_translation_z, -8.0f, 8.0f);
-
-			ImGui::SliderFloat("Rotate y", &m_rotateY, -8.0f, 8.0f);
-			ImGui::SliderFloat("Rotate x", &m_rotateX, -8.0f, 8.0f);
+			ImGui::SliderFloat("Translate Z", &m_onlineParams.transformZ, -100.0f, 100.0f);
+			ImGui::SliderFloat("Rotation X", &m_onlineParams.rotateX, -0.6f, 0.6f);
+			ImGui::SliderFloat("Rotation Y", &m_onlineParams.rotateY, -2.0f, 2.0f);
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}

@@ -29,7 +29,7 @@ int main() {
 		return 1;
 	}
 
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(840, 480, "Hello Triangle", NULL, NULL);
 	if (!window) {
 		std::cout << "ERROR: could not open window with GLFW3" << std::endl;
 		glfwTerminate();
@@ -51,6 +51,15 @@ int main() {
 	GLCall(glEnable(GL_DEPTH_TEST));
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
+
+	glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_POLYGON_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+	//glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
 	float r = 0.0f;
 	Renderer render;

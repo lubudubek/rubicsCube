@@ -7,7 +7,7 @@
 Cubic::Cubic(std::vector<Position> points, glm::mat4 initTransformation)
 	: m_positions(points),
 	  m_transformation(initTransformation),
-	  m_initTransformation(initTransformation),
+	commonTransformation(initTransformation),
 	  countX(0),
 	  countY(0),
 	  m_positionSwitch(),
@@ -23,9 +23,17 @@ glm::mat4 Cubic::getTransformation() const
 
 void Cubic::addTransformation(glm::mat4 addedTransformation)
 {
+	
+	m_transformation = addedTransformation * glm::inverse(commonTransformation) * m_transformation;
+	commonTransformation = addedTransformation;
+}
+
+void Cubic::initiateTransformation(glm::mat4 addedTransformation)
+{
 	commonTransformation = addedTransformation;
 	m_transformation = addedTransformation * m_transformation;
 }
+
 
 void Cubic::rotateCenterX(float angle)
 {

@@ -7,7 +7,7 @@
 #include "Texture.hpp"
 #include <memory>
 #include "CubicTransformations.hpp"
-
+#include "OnlineParams.hpp"
 
 namespace test
 {
@@ -23,8 +23,6 @@ namespace test
 	private:
 		float* m_points;
 		unsigned int* m_indecies;
-		glm::vec3 m_translationA;
-		glm::vec3 m_translationB;
 		glm::mat4 m_proj;
 		glm::mat4 m_view;
 		std::shared_ptr<VertexArray> m_va;
@@ -33,21 +31,9 @@ namespace test
 		std::shared_ptr<VertexBufferLayout> m_layout;
 		std::shared_ptr<Shader> m_shader;
 		std::shared_ptr<Texture> m_texture;
-
-		float m_fovy;
-		float m_fovy1;
-		float m_fovy2;
-
-		float m_translation_x;
-		float m_translation_y;
-		float m_translation_z;
-
-		float m_rotateY;
-		float m_rotateX;
-		int direction;
-		double tempAngle;
 		CubicTransformations cubicMvps;
 
+		OnlineParams m_onlineParams{};
 
 		void setIndecies();
 		void setCubePoints();

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <map>
 #include "Cubic.hpp"
+#include "OnlineParams.hpp"
 
 enum class CubicType
 {
@@ -35,9 +36,11 @@ enum class CubicType
 class CubicTransformations
 {
 public:
-	CubicTransformations(float translationX, float translationY, float translationZ);
+	CubicTransformations(OnlineParams& onlineParams);
 	std::vector<glm::mat4> getTransformations();
 	void addCommonTrnasformation(const glm::mat4& commonTrnansformation);
+	void initiateCommonTrnasformation(const glm::mat4& commonTrnansformation);
+
 	void recalculatePosition(int direction);
 	void rotate(Rotation direction);
 	void update();
@@ -47,7 +50,5 @@ private:
 	std::vector<Cubic> m_transformations;
 	glm::mat4 commonTrnansformation;
 	
-	float& m_translationX;
-	float& m_translationY;
-	float& m_translationZ;
+	OnlineParams& m_onlineParams;
 };

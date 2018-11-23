@@ -14,6 +14,8 @@ public:
 	Cubic(std::vector<Position>, glm::mat4);
 	glm::mat4 getTransformation() const;
 	void addTransformation(glm::mat4 addedTransformation);
+	void initiateTransformation(glm::mat4 addedTransformation);
+
 	PositionSwitch m_positionSwitch;
 
 	glm::mat4 commonTransformation;
