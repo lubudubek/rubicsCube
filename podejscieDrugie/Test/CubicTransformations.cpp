@@ -84,7 +84,7 @@ void CubicTransformations::recalculatePosition(int direction)
 
 }
 
-void CubicTransformations::rotate(Rotation direction)
+void CubicTransformations::startRotation(Rotation direction)
 {
 	for (auto& transform : m_transformations)
     	transform.startRotation(direction);
@@ -99,16 +99,12 @@ void CubicTransformations::update()
 
 	//glm::mat4 m_proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.8f, 2.0f));
-	glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.4f, 0.0f, 0.0f));
+	glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
 	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 commonTrnansformation = proj * model1 *  rotationx * rotationy;// *scale;
-	//glm::mat4 commonTrnansformation = transX * proj   *model1 *  rotationx * rotationy * scale;
-
-	//initiateCommonTrnasformation(commonTrnansformation);
-
+	glm::mat4 commonTrnansformation = transX * proj * model1 *  rotationx * rotationy *scale;
 
 	for (auto& transform : m_transformations)
 		transform.update();
-	addCommonTrnasformation(commonTrnansformation);
+	initiateCommonTrnasformation(commonTrnansformation);
 }

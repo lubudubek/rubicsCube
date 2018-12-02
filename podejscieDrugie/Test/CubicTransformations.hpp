@@ -42,7 +42,7 @@ public:
 	void initiateCommonTrnasformation(const glm::mat4& commonTrnansformation);
 
 	void recalculatePosition(int direction);
-	void rotate(Rotation direction);
+	void startRotation(Rotation direction);
 	void update();
 
 

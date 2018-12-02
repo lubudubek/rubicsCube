@@ -49,17 +49,25 @@ int main() {
 	printf("OpenGL version supported %s\n", version);
 
 	GLCall(glEnable(GL_DEPTH_TEST));
-	GLCall(glEnable(GL_BLEND));
-	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+	//GLCall(glEnable(GL_BLEND));
+	////GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 
-	glEnable(GL_LINE_SMOOTH);
+	////glEnable(GL_LINE_SMOOTH);
+	//glEnable(GL_POLYGON_SMOOTH);
+	////glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	////glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+	////glEnable(GL_BLEND);
+	////glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // works fine, except cracks
 	glEnable(GL_POLYGON_SMOOTH);
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	//glBlendFunc( GL_SRC_ALPHA_SATURATE, GL_ONE ) ; // works only on black background...
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glEnable(GL_POLYGON_SMOOTH);
 	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
-	//glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 
 	float r = 0.0f;
 	Renderer render;

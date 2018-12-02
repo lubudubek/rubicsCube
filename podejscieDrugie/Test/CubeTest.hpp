@@ -21,8 +21,6 @@ namespace test
 		virtual void OnRenderer();
 		virtual void OnImGuiRenderer();
 	private:
-		float* m_points;
-		unsigned int* m_indecies;
 		glm::mat4 m_proj;
 		glm::mat4 m_view;
 		std::shared_ptr<VertexArray> m_va;
@@ -34,8 +32,5 @@ namespace test
 		CubicTransformations cubicMvps;
 
 		OnlineParams m_onlineParams{};
-
-		void setIndecies();
-		void setCubePoints();
 	};
 }
