@@ -8,6 +8,7 @@ class Cubic
 {
 private:
 	std::vector<Position> m_positions;
+	std::vector<Position> m_initialPositions;
 	glm::mat4 m_transformation;
 	glm::mat4 m_initTransformation;
 public:
@@ -15,31 +16,17 @@ public:
 	glm::mat4 getTransformation() const;
 	void addTransformation(glm::mat4 addedTransformation);
 	void initiateTransformation(glm::mat4 addedTransformation);
+	std::vector<Position>& getPosition();
+	std::vector<Position>& getInitialPosition();
+
 
 	PositionSwitch m_positionSwitch;
 
 	glm::mat4 commonTransformation;
-	void rotateCenterX(float angle);
-	void rotateRightX(float angle);
-	void rotateLeftX(float angle);
 
-	void rotateCenterY(float angle);
-	void rotateTopY(float angle);
-	void rotateBottomY(float angle);
-
-	void rotateCenterZ(float angle);
-	void rotateFrontZ(float angle);
-	void rotateBackZ(float angle);
-
-	short countX;
-	short countY;
-	short coutnZ;
-
-	void startRotation(Rotation direction);
 	void rotateOnAxis(float angle, glm::vec3 axis);
 	double m_animationAngle;
 	Rotation m_direction;
-	void update();
-	bool isCubicOnAxis(Position rotatedPositions);
-	bool isCubicNotOnAxis(std::vector<Position> notRotatedPositions);
+
+	void rotatePosition(std::vector<Position> rotation, int direction);
 };

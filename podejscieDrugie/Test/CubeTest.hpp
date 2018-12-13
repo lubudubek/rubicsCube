@@ -8,6 +8,9 @@
 #include <memory>
 #include "CubicTransformations.hpp"
 #include "OnlineParams.hpp"
+#include "KeyHandler.hpp"
+#include <queue>
+#include "RotationFinder.hpp"
 
 namespace test
 {
@@ -30,6 +33,9 @@ namespace test
 		std::shared_ptr<Shader> m_shader;
 		std::shared_ptr<Texture> m_texture;
 		CubicTransformations cubicMvps;
+		KeyHandler m_keyHandler;
+		std::queue<std::shared_ptr<Rotator>> m_rotators;
+		RotationFinder m_rotationFinder;
 
 		OnlineParams m_onlineParams{};
 	};

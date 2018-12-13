@@ -4,6 +4,7 @@
 #include <map>
 #include "Cubic.hpp"
 #include "OnlineParams.hpp"
+#include "Rotators/Rotator.hpp"
 
 enum class CubicType
 {
@@ -42,13 +43,17 @@ public:
 	void initiateCommonTrnasformation(const glm::mat4& commonTrnansformation);
 
 	void recalculatePosition(int direction);
-	void startRotation(Rotation direction);
-	void update();
-
+	//void startRotation(Rotation direction);
+	bool update();
+	void setRotator(std::shared_ptr<Rotator>);
+	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> getPositions();
+	std::tuple<const std::vector<Position>&> getPositions1();
 
 private:
 	std::vector<Cubic> m_transformations;
 	glm::mat4 commonTrnansformation;
 	
 	OnlineParams& m_onlineParams;
+	std::shared_ptr<Rotator> m_rotator;
+	glm::mat4 prepareCommonTransformation();
 };

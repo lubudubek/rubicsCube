@@ -36,30 +36,30 @@ void PointersBuilder::setInitialCubePoints()
 		 0.5f,  0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
 		-0.5f,  0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
 
-		-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.1f,  // front
-		 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.1f,
-		 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.1f,
-		-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.1f,
-
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.1f,  // right
-		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.1f,
-		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 0.1f,
-		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 0.1f,
-
-		 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.1f,  // left
-		 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.1f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 0.1f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 0.1f,
-
-		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.1f,  // bottom
-		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.1f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.1f,
-		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.1f,
-
-		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.1f,  // top
-		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.1f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f, 0.1f,
-		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f, 0.1f
+		-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,  // front
+		 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+											   
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,  // right
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+											   
+		 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,  // left
+		 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+											   
+		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,  // bottom
+		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+											   
+		-0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 1.0f,  // top
+		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f, 1.0f
 	};
 }
 
@@ -77,7 +77,7 @@ void PointersBuilder::addCubeBoarders()
 		else if (i % 7 == 6)
 		{
 			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = m_points[i - floatsInCube];
+			m_points[i] = 1.0f;//m_points[i - floatsInCube];
 		}
 		else
 		{
@@ -97,7 +97,7 @@ void PointersBuilder::addCubeBoarders()
 		else if (i % 7 == 6)
 		{
 			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = m_points[i - floatsInCube];
+			m_points[i] = 1.0f;//m_points[i - floatsInCube];
 		}
 		else
 		{
@@ -117,7 +117,7 @@ void PointersBuilder::addCubeBoarders()
 		else if (i % 7 == 6)
 		{
 			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = m_points[i - floatsInCube];
+			m_points[i] = 1.0f;//m_points[i - floatsInCube];
 		}
 		else
 		{
@@ -141,7 +141,7 @@ void PointersBuilder::addInsideCubeBoarders()
 		else if (i % 7 == 6)
 		{
 			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = m_points[i - floatsInCube];
+			m_points[i] = 1.0f;// m_points[i - floatsInCube];
 		}
 		else
 		{
@@ -165,7 +165,7 @@ void PointersBuilder::convertOutsideCubeBoarders()
 		else if (i % 7 == 6)
 		{
 			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = m_points[i - floatsInCube];
+			m_points[i] = 1.0f;// m_points[i - floatsInCube];
 		}
 		else
 		{

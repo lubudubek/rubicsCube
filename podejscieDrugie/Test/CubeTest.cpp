@@ -16,7 +16,8 @@ namespace test
 	CubeTest::CubeTest()
 		:	m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 			m_view(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
-			cubicMvps(m_onlineParams)
+			cubicMvps(m_onlineParams),
+		    m_keyHandler(cubicMvps)
 	{
 		glClearColor(0.3f, 0.2f, 0.8f, 0.1f);
 		PointersBuilder pointerBuilder;
@@ -52,15 +53,32 @@ namespace test
 	{
 		Renderer render;
 		{
-			cubicMvps.update();
-			
+			m_keyHandler.handleKey(m_rotators);
+			m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
+
+			if (cubicMvps.update() and
+				not m_rotators.empty())
+			{
+				std::cout << "size:" << m_rotators.size() << std::endl;
+				//std::cout << "setRotator" << std::endl;
+				cubicMvps.setRotator(m_rotators.front());
+				m_rotators.pop();
+			}
 			m_shader->Bind();
 
-			KeyHandler().handleKey(cubicMvps);
+			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
 
+			int count = 0;
+			float opacity = 1.0f;
 			for(auto& trans : cubicMvps.getTransformations())
 			{
+				if (count == 1 or count == 0)
+					opacity = 1.0f;
+				else
+					opacity = 1.0;
+				count++;
 				m_shader->SetUniformMat4f("u_MVP", trans);
+				m_shader->SetUniform1f("opacity", opacity);
 				render.Draw(*m_va, *m_ib, *m_shader);
 			}
 		}

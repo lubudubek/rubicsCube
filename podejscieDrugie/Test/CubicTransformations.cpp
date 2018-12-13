@@ -3,9 +3,11 @@
 #include <algorithm>
 #include <corecrt_math_defines.h>
 #include <iostream>
+#include "Rotators/EmptyRotator.hpp"
 
 CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
-	: m_onlineParams(onlineParams)
+	: m_onlineParams(onlineParams),
+	  m_rotator(std::make_shared<EmptyRotator>())
 {
 //CENTERS
 	m_transformations.push_back(Cubic({ Position::BACK },   glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  0.0f, -1.0f))));
@@ -18,11 +20,11 @@ CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
 //EDGES
 	m_transformations.push_back(Cubic({ Position::FRONT,  Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  0.0f,  1.0f))));
 	m_transformations.push_back(Cubic({ Position::FRONT,  Position::TOP },    glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  1.0f,  1.0f))));
-	m_transformations.push_back(Cubic({ Position::FRONT,  Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f,  1.0f))));
+	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::FRONT },  glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f,  1.0f))));
 	m_transformations.push_back(Cubic({ Position::FRONT,  Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  0.0f,  1.0f))));
 	m_transformations.push_back(Cubic({ Position::BACK,   Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f,  0.0f, -1.0f))));
 	m_transformations.push_back(Cubic({ Position::BACK,   Position::TOP },    glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  1.0f, -1.0f))));
-	m_transformations.push_back(Cubic({ Position::BACK,   Position::BOTTOM }, glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f, -1.0f))));
+	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::BACK },   glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f, -1.0f, -1.0f))));
 	m_transformations.push_back(Cubic({ Position::BACK,   Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f,  0.0f, -1.0f))));
 	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::RIGHT },  glm::translate(glm::mat4(1.0f), glm::vec3( 1.0f, -1.0f,  0.0f))));
 	m_transformations.push_back(Cubic({ Position::BOTTOM, Position::LEFT },   glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f,  0.0f))));
@@ -55,8 +57,11 @@ CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
 
 	initiateCommonTrnasformation(glm::mat4(1.0f));
 	//addCommonTrnasformation(commonTrnansformation);
+}
 
-
+void CubicTransformations::setRotator(std::shared_ptr<Rotator> rotator)
+{
+	m_rotator = rotator;
 }
 
 std::vector<glm::mat4> CubicTransformations::getTransformations()
@@ -67,10 +72,25 @@ std::vector<glm::mat4> CubicTransformations::getTransformations()
 	return transformations;
 }
 
+std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> CubicTransformations::getPositions()
+{
+	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> result;
+	for (auto& cubic : m_transformations)
+		result.push_back(std::make_tuple(
+			std::ref(cubic.getInitialPosition()), std::ref(cubic.getPosition())));
+	return result;
+}
+
+std::tuple<const std::vector<Position>&> CubicTransformations::getPositions1()
+{
+	return std::make_tuple(std::ref(m_transformations[10].getPosition()));
+}
+
 void CubicTransformations::addCommonTrnasformation(const glm::mat4& commonTrnansformation)
 {
 	for (auto& transform : m_transformations)
 		transform.addTransformation(commonTrnansformation);
+	m_rotator = std::make_unique<EmptyRotator>();
 }
 
 void CubicTransformations::initiateCommonTrnasformation(const glm::mat4& commonTrnansformation)
@@ -84,13 +104,20 @@ void CubicTransformations::recalculatePosition(int direction)
 
 }
 
-void CubicTransformations::startRotation(Rotation direction)
+bool CubicTransformations::update()
 {
-	for (auto& transform : m_transformations)
-    	transform.startRotation(direction);
+
+	bool result = false;
+	if (not m_rotator->move(m_transformations))
+	{
+		setRotator(std::make_shared<EmptyRotator>());
+		result = true;
+	}
+	initiateCommonTrnasformation(prepareCommonTransformation());
+	return result;
 }
 
-void CubicTransformations::update()
+glm::mat4 CubicTransformations::prepareCommonTransformation()
 {
 	glm::vec3 m_translationB(0.0f, 0.0f, m_onlineParams.transformZ);
 
@@ -102,9 +129,6 @@ void CubicTransformations::update()
 	glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
 	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 commonTrnansformation = transX * proj * model1 *  rotationx * rotationy *scale;
+	return transX * proj * model1 *  rotationx * rotationy *scale;
 
-	for (auto& transform : m_transformations)
-		transform.update();
-	initiateCommonTrnasformation(commonTrnansformation);
 }

@@ -62,11 +62,11 @@ int main() {
 	//glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // works fine, except cracks
-	glEnable(GL_POLYGON_SMOOTH);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // works fine, except cracks
+	//glEnable(GL_POLYGON_SMOOTH);
 	//glBlendFunc( GL_SRC_ALPHA_SATURATE, GL_ONE ) ; // works only on black background...
-	glPolygonMode(GL_FRONT, GL_FILL);
-	glEnable(GL_POLYGON_SMOOTH);
+	//glPolygonMode(GL_FRONT, GL_FILL);
+	//glEnable(GL_POLYGON_SMOOTH);
 	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 
 	float r = 0.0f;

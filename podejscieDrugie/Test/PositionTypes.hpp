@@ -52,6 +52,15 @@ inline std::ostream& operator<< (std::ostream& stream, const Position& position)
 	return stream;
 }
 
+inline std::ostream& operator<< (std::ostream& stream, const std::vector<Position>& position)
+{
+	stream << "[ ";
+	for (auto& pos : position)
+		stream << pos << " ";
+	stream << "]";
+	return stream;
+}
+
 inline std::ostream& operator<< (std::ostream& stream, const Rotation& rotation)
 {
 	std::string temp;

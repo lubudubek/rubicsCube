@@ -6,10 +6,13 @@ layout(location = 1) in vec4 color;
 out vec4 Color;
 
 uniform mat4 u_MVP;
+uniform float opacity;
 
 void main() {
   gl_Position = u_MVP * position;
+  
   Color = color;
+  Color[3] = Color[3] * opacity;
 };
 
 #shader fragment
