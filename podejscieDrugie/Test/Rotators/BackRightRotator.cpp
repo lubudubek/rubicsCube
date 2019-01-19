@@ -24,13 +24,8 @@ bool BackRightRotator::move(std::vector<Cubic>& cubics)
 		if (isCubicOnAxis(cubic.getPosition(), m_rotatedPositions))
 		{
 			cubic.rotateOnAxis(-STEP, glm::vec3(0.0f, 0.0f, 1.0f));
-			//rotateCenterX(-M_PI / 20);
-			//std::cout << "rotate on Axis" << std::endl;
 			if (m_rotationCounter == 1)
 			{
-				//std::cout << "Rotate Position";
-				//m_positionSwitch.rotateForwardX(m_positions);
-				//m_directionX{ Position::TOP, Position::FRONT, Position::BOTTOM, Position::BACK }
 				cubic.rotatePosition(PositionSwitch().getDirectionZ(), 3);
 			}
 		}
@@ -43,4 +38,22 @@ bool BackRightRotator::move(std::vector<Cubic>& cubics)
 	}
 
 	return true;
+}
+
+void BackRightRotator::animationMove(Cubic& cubic)
+{
+	if (isCubicOnAxis(cubic.getPosition(), m_rotatedPositions))
+	{
+		//std::cout << "back right rotator - animationMove on axis" << std::endl;
+		cubic.rotateOnAxis(-STEP, glm::vec3(0.0f, 0.0f, 1.0f));
+	}
+}
+
+void BackRightRotator::lastMove(Cubic& cubic)
+{
+	if (isCubicOnAxis(cubic.getPosition(), m_rotatedPositions))
+	{
+		//std::cout << "back right rotator - last Move on axis" << std::endl;
+		cubic.rotatePosition(PositionSwitch().getDirectionZ(), 3);
+	}
 }

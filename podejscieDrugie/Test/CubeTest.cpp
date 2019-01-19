@@ -8,6 +8,7 @@
 #include "KeyHandler.hpp"
 #include "PointersBuilder.hpp"
 #include "IndeciesBuilder.hpp"
+
 //#define _USE_MATH_DEFINES
 
 namespace test
@@ -36,6 +37,8 @@ namespace test
 		m_va->AddBuffer(*m_vb, *m_layout);
 
 		m_shader->Bind();
+
+		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotators);
 	}
 
 	CubeTest::~CubeTest()
@@ -54,16 +57,17 @@ namespace test
 		Renderer render;
 		{
 			m_keyHandler.handleKey(m_rotators);
-			m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
-
-			if (cubicMvps.update() and
-				not m_rotators.empty())
-			{
-				std::cout << "size:" << m_rotators.size() << std::endl;
-				//std::cout << "setRotator" << std::endl;
-				cubicMvps.setRotator(m_rotators.front());
-				m_rotators.pop();
-			}
+			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
+			m_cubicSupervisor->ping();
+			cubicMvps.handleCamera();
+			//if (cubicMvps.update() and
+			//	not m_rotators.empty())
+			//{
+			//	std::cout << "size:" << m_rotators.size() << std::endl;
+			//	//std::cout << "setRotator" << std::endl;
+			//	cubicMvps.setRotator(m_rotators.front());
+			//	m_rotators.pop();
+			//}
 			m_shader->Bind();
 
 			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
@@ -75,7 +79,7 @@ namespace test
 				if (count == 1 or count == 0)
 					opacity = 1.0f;
 				else
-					opacity = 1.0;
+					opacity = 0.2;
 				count++;
 				m_shader->SetUniformMat4f("u_MVP", trans);
 				m_shader->SetUniform1f("opacity", opacity);

@@ -11,6 +11,7 @@
 #include "KeyHandler.hpp"
 #include <queue>
 #include "RotationFinder.hpp"
+#include "CubicAnimateSupervisor.hpp"
 
 namespace test
 {
@@ -37,6 +38,7 @@ namespace test
 		std::queue<std::shared_ptr<Rotator>> m_rotators;
 		RotationFinder m_rotationFinder;
 
+		std::unique_ptr<CubicAnimateSupervisor> m_cubicSupervisor;
 		OnlineParams m_onlineParams{};
 	};
 }

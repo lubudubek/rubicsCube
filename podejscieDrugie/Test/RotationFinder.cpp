@@ -42,11 +42,11 @@ std::vector<Rotation> RotationFinder::findNextRotationSet(std::queue<std::shared
 	}
 	else
 	{
-		if ((*whiteCubeToMove)[0] == Position::TOP and (*whiteCubeToMove)[1] == Position::LEFT)
-		{
-			rotators.push(std::make_shared<LeftUpRotator>());
-			rotators.push(std::make_shared<LeftUpRotator>());
-		}
+		//if ((*whiteCubeToMove)[0] == Position::TOP and (*whiteCubeToMove)[1] == Position::LEFT)
+		//{
+		//	rotators.push(std::make_shared<LeftUpRotator>());
+		//	rotators.push(std::make_shared<LeftUpRotator>());
+		//}
 		std::cout << "WHITE CROSS NOT SOLVED" << std::endl;
 	}
 	return {};

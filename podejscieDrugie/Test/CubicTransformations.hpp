@@ -39,16 +39,15 @@ class CubicTransformations
 public:
 	CubicTransformations(OnlineParams& onlineParams);
 	std::vector<glm::mat4> getTransformations();
-	void addCommonTrnasformation(const glm::mat4& commonTrnansformation);
 	void initiateCommonTrnasformation(const glm::mat4& commonTrnansformation);
-
-	void recalculatePosition(int direction);
-	//void startRotation(Rotation direction);
+	void handleCamera();
 	bool update();
 	void setRotator(std::shared_ptr<Rotator>);
+	void setRotators(std::shared_ptr<Rotator>);
 	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> getPositions();
-	std::tuple<const std::vector<Position>&> getPositions1();
 
+	void moveLast();
+	void stepMove();
 private:
 	std::vector<Cubic> m_transformations;
 	glm::mat4 commonTrnansformation;

@@ -2,7 +2,7 @@
 #include <vector>
 #include "glm/glm.hpp"
 #include "PositionSwitch.hpp"
-
+//#include "Rotators/Rotator.hpp"
 
 class Cubic
 {
@@ -11,6 +11,7 @@ private:
 	std::vector<Position> m_initialPositions;
 	glm::mat4 m_transformation;
 	glm::mat4 m_initTransformation;
+	//std::shared_ptr<Rotator> m_rotator;
 public:
 	Cubic(std::vector<Position>, glm::mat4);
 	glm::mat4 getTransformation() const;
@@ -18,6 +19,7 @@ public:
 	void initiateTransformation(glm::mat4 addedTransformation);
 	std::vector<Position>& getPosition();
 	std::vector<Position>& getInitialPosition();
+	//void setRotation(std::shared_ptr<Rotator>);
 
 
 	PositionSwitch m_positionSwitch;

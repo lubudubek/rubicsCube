@@ -46,6 +46,11 @@ std::vector<Position>& Cubic::getInitialPosition()
 	return m_initialPositions;
 }
 
+//void setRotation(std::shared_ptr<Rotator> m_rotator)
+//{
+//
+//}
+
 void Cubic::rotatePosition(std::vector<Position> rotation, int direction)
 {
 	for (auto& position : m_positions)
