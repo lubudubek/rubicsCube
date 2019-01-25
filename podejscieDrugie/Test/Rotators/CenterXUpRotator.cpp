@@ -21,7 +21,7 @@ bool CenterXUpRotator::move(std::vector<Cubic>& cubics)
 {
 	for (auto& cubic : cubics)
 	{
-		if (isCubicNotOnAxis(cubic.getPosition(), m_notRotatedPositions))
+		//if (isCubicNotOnAxis(cubic.getPosition(), m_notRotatedPositions))
 		{
 			cubic.rotateOnAxis(-STEP, glm::vec3(1.0f, 0.0f, 0.0f));
 			//rotateCenterX(-M_PI / 20);
@@ -31,7 +31,7 @@ bool CenterXUpRotator::move(std::vector<Cubic>& cubics)
 				//std::cout << "Rotate Position";
 				//m_positionSwitch.rotateForwardX(m_positions);
 				//m_directionX{ Position::TOP, Position::FRONT, Position::BOTTOM, Position::BACK }
-				cubic.rotatePosition(PositionSwitch().getDirectionX(), 3);
+				//cubic.rotatePosition(PositionSwitch().getDirectionX(), 3);
 			}
 		}
 	}

@@ -20,13 +20,15 @@
 #include "Rotators/TopRightRotator.hpp"
 #include "Rotators/EmptyRotator.hpp"
 #include <queue>
+#include "Rotators/IRotation.hpp"
 
 class KeyHandler
 {
 
 public:
 	KeyHandler(CubicTransformations& cubicMvps);
-	void handleKey(std::queue<std::shared_ptr<Rotator>>& rotators);
+	void handleKey(std::queue<std::shared_ptr<Rotator>>& rotators,
+				   std::queue<std::shared_ptr<IRotation>>& rotates);
 private:
 	std::shared_ptr<BackLeftRotator> m_backLeftRotator;
 	std::shared_ptr<CenterXUpRotator> m_centerXUpRotator;
@@ -48,4 +50,5 @@ private:
 	std::shared_ptr<TopRightRotator> m_topRightRotator;
 	std::shared_ptr<EmptyRotator> m_emptyRotator;
 	CubicTransformations& m_cubicMvps;
+	std::shared_ptr<Rotation> tempRotation;
 };

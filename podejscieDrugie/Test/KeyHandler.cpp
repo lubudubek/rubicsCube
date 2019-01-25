@@ -3,6 +3,8 @@
 #include <iostream>
 #include "PositionTypes.hpp"
 #include "Rotators/CenterXUpRotator.hpp"
+#include "Rotators/Rotation.hpp"
+#include "Rotators/NoRotation.hpp"
 
 KeyHandler::KeyHandler(CubicTransformations& cubicMvps)
 	: m_backLeftRotator(std::make_shared<BackLeftRotator>()),
@@ -26,9 +28,16 @@ KeyHandler::KeyHandler(CubicTransformations& cubicMvps)
 	  m_emptyRotator(std::make_shared<EmptyRotator>()),
 	  m_cubicMvps(cubicMvps)
 {
+	std::vector<Position> notRotatedPositions = {};
+	tempRotation = std::make_shared<Rotation>(glm::vec3(0.0f, 0.0f, 1.0f),
+		Direction::BACKWARD,
+		PositionSwitch().getDirectionZ(),
+		Position::BACK,
+		notRotatedPositions);
 }
 
-void KeyHandler::handleKey(std::queue<std::shared_ptr<Rotator>>& rotators)
+void KeyHandler::handleKey(std::queue<std::shared_ptr<Rotator>>& rotators,
+						   std::queue<std::shared_ptr<IRotation>>& rotates)
 {
 	std::queue<std::shared_ptr<Rotator>> empty;
 	if (ImGui::IsKeyPressed(68)) // d
@@ -83,7 +92,16 @@ void KeyHandler::handleKey(std::queue<std::shared_ptr<Rotator>>& rotators)
 	}
 	if (ImGui::IsKeyPressed(262)) // arrow right
 	{
-		rotators.swap(empty);
+		std::vector<Position> notRotatedPositions = {};
+		std::shared_ptr<IRotation> rotation = std::make_shared<Rotation>(glm::vec3(0.0f, 0.0f, 1.0f),
+																	Direction::BACKWARD,
+																	PositionSwitch().getDirectionZ(),
+																	Position::BACK,
+																	notRotatedPositions);
+		std::queue<std::shared_ptr<IRotation>> tempEmpty;
+		rotates.swap(tempEmpty);
+		rotates.push(tempRotation);
+		
 		rotators.push(m_backRightRotator);
 		std::cout << "BACK_ROTATE_RIGHT" << std::endl;
 	}

@@ -56,20 +56,18 @@ CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
 	glm::mat4 commonTrnansformation = m_proj * proj * model1 * rotationx * rotationy;
 
 	initiateCommonTrnasformation(glm::mat4(1.0f));
-	//addCommonTrnasformation(commonTrnansformation);
 }
 
 void CubicTransformations::setRotator(std::shared_ptr<Rotator> rotator)
 {
-	m_rotator = rotator;
 }
-auto conditionallySetRotator = []() {};
-void CubicTransformations::setRotators(std::shared_ptr<Rotator> rotator)
+
+void CubicTransformations::setRotators(std::shared_ptr<IRotation> rotator)
 {
-	//for (auto& cubic : m_transformations)
-	//{
-	//	cubic.setRotation(rotator);
-	//}
+	for (auto& cubic : m_transformations)
+	{
+		cubic.applyRotator(rotator);
+	}
 }
 
 std::vector<glm::mat4> CubicTransformations::getTransformations()
@@ -95,19 +93,6 @@ void CubicTransformations::initiateCommonTrnasformation(const glm::mat4& commonT
 		transform.initiateTransformation(commonTrnansformation);
 }
 
-bool CubicTransformations::update()
-{
-
-	bool result = false;
-	if (not m_rotator->move(m_transformations))
-	{
-		setRotator(std::make_shared<EmptyRotator>());
-		result = true;
-	}
-	initiateCommonTrnasformation(prepareCommonTransformation());
-	return result;
-}
-
 void CubicTransformations::handleCamera()
 {
 	initiateCommonTrnasformation(prepareCommonTransformation());
@@ -117,7 +102,7 @@ void CubicTransformations::stepMove()
 {
 	for (auto& cubic : m_transformations)
 	{
-		m_rotator->animationMove(cubic);
+		cubic.rotate();
 	}
 }
 
@@ -125,7 +110,7 @@ void CubicTransformations::moveLast()
 {
 	for (auto& cubic : m_transformations)
 	{
-		m_rotator->lastMove(cubic);
+		cubic.rotatePosition();
 	}
 }
 

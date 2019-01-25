@@ -5,6 +5,7 @@
 #include "Cubic.hpp"
 #include "OnlineParams.hpp"
 #include "Rotators/Rotator.hpp"
+#include "Rotators/Rotation.hpp"
 
 enum class CubicType
 {
@@ -41,9 +42,8 @@ public:
 	std::vector<glm::mat4> getTransformations();
 	void initiateCommonTrnasformation(const glm::mat4& commonTrnansformation);
 	void handleCamera();
-	bool update();
 	void setRotator(std::shared_ptr<Rotator>);
-	void setRotators(std::shared_ptr<Rotator>);
+	void setRotators(std::shared_ptr<IRotation>);
 	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> getPositions();
 
 	void moveLast();

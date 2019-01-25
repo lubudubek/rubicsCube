@@ -2,6 +2,7 @@
 
 #include "../Cubic.hpp"
 #include <algorithm>
+#include <vector>
 
 class Rotator
 {

@@ -21,7 +21,7 @@ bool CenterYLeftRotator::move(std::vector<Cubic>& cubics)
 {
 	for (auto& cubic : cubics)
 	{
-		if (isCubicNotOnAxis(cubic.getPosition(), m_rotatedPositions))
+		//if (isCubicNotOnAxis(cubic.getPosition(), m_rotatedPositions))
 		{
 			cubic.rotateOnAxis(-STEP, glm::vec3(0.0f, 1.0f, 0.0f));
 			//rotateCenterX(-M_PI / 20);
@@ -31,7 +31,7 @@ bool CenterYLeftRotator::move(std::vector<Cubic>& cubics)
 				//std::cout << "Rotate Position";
 				//m_positionSwitch.rotateForwardX(m_positions);
 				//m_directionX{ Position::TOP, Position::FRONT, Position::BOTTOM, Position::BACK }
-				cubic.rotatePosition(PositionSwitch().getDirectionY(), 3);
+				//cubic.rotatePosition(PositionSwitch().getDirectionY(), 3);
 			}
 		}
 	}

@@ -11,5 +11,5 @@ private:
 public:
 	RotationFinder();
 
-	std::vector<Rotation> findNextRotationSet(std::queue<std::shared_ptr<Rotator>>&, CubicTransformations&);
+	std::vector<std::shared_ptr<IRotation>> findNextRotationSet(std::queue<std::shared_ptr<Rotator>>&, CubicTransformations&);
 };

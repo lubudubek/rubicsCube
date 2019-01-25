@@ -9,8 +9,13 @@ enum class Position
 	BOTTOM,
 	TOP
 };
+enum class Direction
+{
+	FORWARD = 1,
+	BACKWARD = 3
+};
 
-enum class Rotation
+enum class Rotation1
 {
 	UNSPECIFIED,
 
@@ -61,33 +66,33 @@ inline std::ostream& operator<< (std::ostream& stream, const std::vector<Positio
 	return stream;
 }
 
-inline std::ostream& operator<< (std::ostream& stream, const Rotation& rotation)
+inline std::ostream& operator<< (std::ostream& stream, const Rotation1& rotation)
 {
 	std::string temp;
 	switch (rotation)
 	{
-	    case Rotation::UNSPECIFIED: temp = "UNSPECIFIED"; break;
+	    case Rotation1::UNSPECIFIED: temp = "UNSPECIFIED"; break;
 
-		case Rotation::FRONT_ROTATE_RIGHT: temp = "FRONT_ROTATE_RIGHT"; break;
-		case Rotation::FRONT_ROTATE_LEFT: temp = "FRONT_ROTATE_LEFT"; break;
-		case Rotation::BACK_ROTATE_RIGHT: temp = "BACK_ROTATE_RIGHT"; break;
-		case Rotation::BACK_ROTATE_LEFT: temp = "BACK_ROTATE_LEFT"; break;
-		case Rotation::CENTER_Z_ROTATE_RIGHT: temp = "CENTER_Z_ROTATE_RIGHT"; break;
-		case Rotation::CENTER_Z_ROTATE_LEFT: temp = "CENTER_Z_ROTATE_LEFT"; break;
+		case Rotation1::FRONT_ROTATE_RIGHT: temp = "FRONT_ROTATE_RIGHT"; break;
+		case Rotation1::FRONT_ROTATE_LEFT: temp = "FRONT_ROTATE_LEFT"; break;
+		case Rotation1::BACK_ROTATE_RIGHT: temp = "BACK_ROTATE_RIGHT"; break;
+		case Rotation1::BACK_ROTATE_LEFT: temp = "BACK_ROTATE_LEFT"; break;
+		case Rotation1::CENTER_Z_ROTATE_RIGHT: temp = "CENTER_Z_ROTATE_RIGHT"; break;
+		case Rotation1::CENTER_Z_ROTATE_LEFT: temp = "CENTER_Z_ROTATE_LEFT"; break;
 
-		case Rotation::LEFT_ROTATE_DOWN: temp = "LEFT_ROTATE_DOWN"; break;
-		case Rotation::LEFT_ROTATE_UP: temp = "LEFT_ROTATE_UP"; break;
-		case Rotation::RIGHT_ROTATE_DOWN: temp = "RIGHT_ROTATE_DOWN"; break;
-		case Rotation::RIGHT_ROTATE_UP: temp = "RIGHT_ROTATE_UP"; break;
-		case Rotation::CENTER_X_ROTATE_DOWN: temp = "CENTER_X_ROTATE_DOWN"; break;
-		case Rotation::CENTER_X_ROTATE_UP: temp = "CENTER_X_ROTATE_UP"; break;
+		case Rotation1::LEFT_ROTATE_DOWN: temp = "LEFT_ROTATE_DOWN"; break;
+		case Rotation1::LEFT_ROTATE_UP: temp = "LEFT_ROTATE_UP"; break;
+		case Rotation1::RIGHT_ROTATE_DOWN: temp = "RIGHT_ROTATE_DOWN"; break;
+		case Rotation1::RIGHT_ROTATE_UP: temp = "RIGHT_ROTATE_UP"; break;
+		case Rotation1::CENTER_X_ROTATE_DOWN: temp = "CENTER_X_ROTATE_DOWN"; break;
+		case Rotation1::CENTER_X_ROTATE_UP: temp = "CENTER_X_ROTATE_UP"; break;
 
-		case Rotation::BOTTOM_ROTATE_RIGHT: temp = "BOTTOM_ROTATE_RIGHT"; break;
-		case Rotation::BOTTOM_ROTATE_LEFT: temp = "BOTTOM_ROTATE_LEFT"; break;
-		case Rotation::TOP_ROTATE_RIGHT: temp = "TOP_ROTATE_RIGHT"; break;
-		case Rotation::TOP_ROTATE_LEFT: temp = "TOP_ROTATE_LEFT"; break;
-		case Rotation::CENTER_Y_ROTATE_RIGHT: temp = "CENTER_Y_ROTATE_RIGHT"; break;
-		case Rotation::CENTER_Y_ROTATE_LEFT: temp = "CENTER_Y_ROTATE_LEFT"; break;
+		case Rotation1::BOTTOM_ROTATE_RIGHT: temp = "BOTTOM_ROTATE_RIGHT"; break;
+		case Rotation1::BOTTOM_ROTATE_LEFT: temp = "BOTTOM_ROTATE_LEFT"; break;
+		case Rotation1::TOP_ROTATE_RIGHT: temp = "TOP_ROTATE_RIGHT"; break;
+		case Rotation1::TOP_ROTATE_LEFT: temp = "TOP_ROTATE_LEFT"; break;
+		case Rotation1::CENTER_Y_ROTATE_RIGHT: temp = "CENTER_Y_ROTATE_RIGHT"; break;
+		case Rotation1::CENTER_Y_ROTATE_LEFT: temp = "CENTER_Y_ROTATE_LEFT"; break;
 	}
 	stream << temp;
 	return stream;

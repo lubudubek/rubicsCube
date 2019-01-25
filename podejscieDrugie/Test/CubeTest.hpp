@@ -12,6 +12,7 @@
 #include <queue>
 #include "RotationFinder.hpp"
 #include "CubicAnimateSupervisor.hpp"
+#include "Rotators/Rotation.hpp"
 
 namespace test
 {
@@ -36,6 +37,8 @@ namespace test
 		CubicTransformations cubicMvps;
 		KeyHandler m_keyHandler;
 		std::queue<std::shared_ptr<Rotator>> m_rotators;
+		std::queue<std::shared_ptr<IRotation>> m_rotates;
+
 		RotationFinder m_rotationFinder;
 
 		std::unique_ptr<CubicAnimateSupervisor> m_cubicSupervisor;

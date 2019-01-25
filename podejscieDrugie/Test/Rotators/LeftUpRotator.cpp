@@ -21,9 +21,9 @@ bool LeftUpRotator::move(std::vector<Cubic>& cubics)
 {
 	for (auto& cubic : cubics)
 	{
-		if (isCubicOnAxis(cubic.getPosition(), m_rotatedPositions))
+		//if (isCubicOnAxis(cubic.getPosition(), m_rotatedPositions))
 		{
-			cubic.rotateOnAxis(-STEP, glm::vec3(1.0f, 0.0f, 0.0f));
+			//cubic.rotateOnAxis(-STEP, glm::vec3(1.0f, 0.0f, 0.0f));
 			//rotateCenterX(-M_PI / 20);
 			//std::cout << "rotate on Axis" << std::endl;
 			if (m_rotationCounter == 1)
@@ -31,7 +31,7 @@ bool LeftUpRotator::move(std::vector<Cubic>& cubics)
 				//std::cout << "Rotate Position";
 				//m_positionSwitch.rotateForwardX(m_positions);
 				//m_directionX{ Position::TOP, Position::FRONT, Position::BOTTOM, Position::BACK }
-				cubic.rotatePosition(PositionSwitch().getDirectionX(), 3);
+				//cubic.rotatePosition(PositionSwitch().getDirectionX(), 3);
 			}
 		}
 	}

@@ -38,7 +38,7 @@ namespace test
 
 		m_shader->Bind();
 
-		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotators);
+		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotators, m_rotates);
 	}
 
 	CubeTest::~CubeTest()
@@ -56,7 +56,7 @@ namespace test
 	{
 		Renderer render;
 		{
-			m_keyHandler.handleKey(m_rotators);
+			m_keyHandler.handleKey(m_rotators, m_rotates);
 			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
 			m_cubicSupervisor->ping();
 			cubicMvps.handleCamera();
