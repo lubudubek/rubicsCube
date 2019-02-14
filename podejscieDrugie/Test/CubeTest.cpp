@@ -18,7 +18,7 @@ namespace test
 		:	m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 			m_view(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
 			cubicMvps(m_onlineParams),
-		    m_keyHandler(cubicMvps)
+		    m_keyHandler()
 	{
 		glClearColor(0.3f, 0.2f, 0.8f, 0.1f);
 		PointersBuilder pointerBuilder;
@@ -38,7 +38,7 @@ namespace test
 
 		m_shader->Bind();
 
-		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotators, m_rotates);
+		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotates);
 	}
 
 	CubeTest::~CubeTest()
@@ -56,21 +56,11 @@ namespace test
 	{
 		Renderer render;
 		{
-			m_keyHandler.handleKey(m_rotators, m_rotates);
+			m_keyHandler.handleKey(m_rotates);
 			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
 			m_cubicSupervisor->ping();
 			cubicMvps.handleCamera();
-			//if (cubicMvps.update() and
-			//	not m_rotators.empty())
-			//{
-			//	std::cout << "size:" << m_rotators.size() << std::endl;
-			//	//std::cout << "setRotator" << std::endl;
-			//	cubicMvps.setRotator(m_rotators.front());
-			//	m_rotators.pop();
-			//}
 			m_shader->Bind();
-
-			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
 
 			int count = 0;
 			float opacity = 1.0f;

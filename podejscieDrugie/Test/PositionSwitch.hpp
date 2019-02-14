@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "PositionTypes.hpp"
+#include "glm/glm.hpp"
 
 class PositionSwitch
 {
@@ -8,20 +9,16 @@ public:
 	PositionSwitch();
 	~PositionSwitch();
 
-	//void rotate(std::vector<Position>& positions, std::vector<Position> rotation, int direction);
-	//void rotateForwardX(std::vector<Position>& currentPosition);
-	//void rotateForwardY(std::vector<Position>& currentPosition);
-	//void rotateForwardZ(std::vector<Position>& currentPosition);
-
-	//void rotateBackwardX(std::vector<Position>& currentPosition);
-	//void rotateBackwardY(std::vector<Position>& currentPosition);
-	//void rotateBackwardZ(std::vector<Position>& currentPosition);
-
-	std::vector<Position> getDirectionX();
-	std::vector<Position> getDirectionY();
-	std::vector<Position> getDirectionZ();
+	std::pair<std::vector<Position>, glm::vec3> getDirectionX();
+	std::pair<std::vector<Position>, glm::vec3> getDirectionY();
+	std::pair<std::vector<Position>, glm::vec3> getDirectionZ();
 private:
 	std::vector<Position> m_directionX;
 	std::vector<Position> m_directionY;
 	std::vector<Position> m_directionZ;
+
+	glm::vec3 m_xAxisVector;
+	glm::vec3 m_yAxisVector;
+	glm::vec3 m_zAxisVector;
+
 };

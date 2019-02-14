@@ -36,7 +36,6 @@ namespace test
 		std::shared_ptr<Texture> m_texture;
 		CubicTransformations cubicMvps;
 		KeyHandler m_keyHandler;
-		std::queue<std::shared_ptr<Rotator>> m_rotators;
 		std::queue<std::shared_ptr<IRotation>> m_rotates;
 
 		RotationFinder m_rotationFinder;

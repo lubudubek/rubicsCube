@@ -7,11 +7,10 @@
 class Rotation : public IRotation
 {
 public:
-	Rotation(glm::vec3 axis,
-		   Direction direction,
-		   std::vector<Position> rotationSequence,
-		   Position rotatedPosition,
-		   std::vector<Position> m_notRotatedPositions);
+	Rotation(Direction direction,
+		     std::pair<std::vector<Position>, glm::vec3> rotationSequence,
+		     Position rotatedPosition,
+		     std::vector<Position> m_notRotatedPositions);
 	virtual void performRotation(glm::mat4& transformation) override;
 	virtual bool isApplicable(const std::vector<Position>& cubicPos) override;
 	virtual void rotatePosition(std::vector<Position>& positions) override;

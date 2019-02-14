@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "Rotators/Rotator.hpp"
 #include "CubicTransformations.hpp"
 #include <queue>
 
@@ -11,5 +10,5 @@ private:
 public:
 	RotationFinder();
 
-	std::vector<std::shared_ptr<IRotation>> findNextRotationSet(std::queue<std::shared_ptr<Rotator>>&, CubicTransformations&);
+	std::vector<std::shared_ptr<IRotation>> findNextRotationSet(std::queue<std::shared_ptr<IRotation>>&, CubicTransformations&);
 };

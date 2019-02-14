@@ -1,14 +1,14 @@
 #include <iostream>
 #include <algorithm>
 #include "RotationFinder.hpp"
-#include "Rotators/LeftUpRotator.hpp"
 #include "Rotators/IRotation.hpp"
 RotationFinder::RotationFinder()
 {
 }
 
-std::vector<std::shared_ptr<IRotation>>  RotationFinder::findNextRotationSet(std::queue<std::shared_ptr<Rotator>>& rotators,
-													      CubicTransformations& cubicTransformations)
+std::vector<std::shared_ptr<IRotation>>  RotationFinder::findNextRotationSet(
+	std::queue<std::shared_ptr<IRotation>>& rotators,
+	CubicTransformations& cubicTransformations)
 {
 	auto currentPositions = cubicTransformations.getPositions();
 	//std::cout << "cubic" << std::get<0>(currentPositions[10]) << std::endl;

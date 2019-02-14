@@ -1,13 +1,10 @@
 #include "CubicAnimateSupervisor.hpp"
-#include "Rotators/EmptyRotator.hpp"
 #include "Rotators/NoRotation.hpp"
 #include <iostream>
 
 CubicAnimateSupervisor::CubicAnimateSupervisor(CubicTransformations& p_cubicMvps,
-											   std::queue<std::shared_ptr<Rotator>>& p_rotators,
 											   std::queue<std::shared_ptr<IRotation>>& p_rotates)
 	: stepCounter{ 0 },
-	  m_rotators(p_rotators),
 	  m_rotates(p_rotates),
 	  m_emptyRotation(std::make_shared<NoRotation>()),
 	  m_cubicMvps(p_cubicMvps)

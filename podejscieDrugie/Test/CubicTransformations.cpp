@@ -3,11 +3,9 @@
 #include <algorithm>
 #include <corecrt_math_defines.h>
 #include <iostream>
-#include "Rotators/EmptyRotator.hpp"
 
 CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
-	: m_onlineParams(onlineParams),
-	  m_rotator(std::make_shared<EmptyRotator>())
+	: m_onlineParams(onlineParams)
 {
 //CENTERS
 	m_transformations.push_back(Cubic({ Position::BACK },   glm::translate(glm::mat4(1.0f), glm::vec3( 0.0f,  0.0f, -1.0f))));
@@ -56,10 +54,6 @@ CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
 	glm::mat4 commonTrnansformation = m_proj * proj * model1 * rotationx * rotationy;
 
 	initiateCommonTrnasformation(glm::mat4(1.0f));
-}
-
-void CubicTransformations::setRotator(std::shared_ptr<Rotator> rotator)
-{
 }
 
 void CubicTransformations::setRotators(std::shared_ptr<IRotation> rotator)
