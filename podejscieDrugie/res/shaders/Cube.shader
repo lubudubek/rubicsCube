@@ -13,7 +13,7 @@ void main() {
   
   Color = color;
   Color[3] = Color[3] * opacity;
-};
+}
 
 #shader fragment
 #version 330
@@ -25,4 +25,4 @@ uniform sampler2D u_Texture;
 void main()
 {
     frag_colour = Color;
-};
+}

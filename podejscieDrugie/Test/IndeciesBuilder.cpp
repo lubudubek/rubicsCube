@@ -50,16 +50,16 @@ void IndeciesBuilder::setAdditionalCubeIndecies()
 	int j = 3 * 12 + 24;
 	for (int i = 1; i < 6; i++)
 	{
-		std::cout << "j old: " << j;
+		//std::cout << "j old: " << j;
 		for (int p = 0; p < 24; p++)
 		{
-			std::cout << ", old: " << m_indecies[j + p - 24];
+			//std::cout << ", old: " << m_indecies[j + p - 24];
 			m_indecies[j + p] = m_indecies[j + p - 24] + 4;
-			std::cout << ", new:" << m_indecies[j + p] << std::endl;
+			//std::cout << ", new:" << m_indecies[j + p] << std::endl;
 		}
 		j = j + 24;
-		std::cout << ", j new: " << j << std::endl;
-		std::cout << std::endl;
+		//std::cout << ", j new: " << j << std::endl;
+		//std::cout << std::endl;
 	}
 }
 
