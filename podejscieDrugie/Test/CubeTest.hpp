@@ -33,7 +33,7 @@ namespace test
 		std::shared_ptr<IndexBuffer> m_ib;
 		std::shared_ptr<VertexBufferLayout> m_layout;
 		std::shared_ptr<Shader> m_shader;
-		std::shared_ptr<Texture> m_texture;
+
 		CubicTransformations cubicMvps;
 		KeyHandler m_keyHandler;
 		std::queue<std::shared_ptr<IRotation>> m_rotates;

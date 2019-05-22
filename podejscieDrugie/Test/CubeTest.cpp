@@ -20,7 +20,6 @@ namespace test
 			cubicMvps(m_onlineParams),
 		    m_keyHandler()
 	{
-		glClearColor(0.3f, 0.2f, 0.8f, 0.1f);
 		PointersBuilder pointerBuilder;
 		IndeciesBuilder indeciesBuilder;
 
@@ -29,7 +28,6 @@ namespace test
 		m_ib = std::make_shared<IndexBuffer>(indeciesBuilder.getIndecies(), 3 * 12 + 6 * 24);
 
 		m_shader = std::make_shared<Shader>("res/shaders/Cube.shader");
-
 		m_layout = std::make_shared<VertexBufferLayout>();
 
 		m_layout->Push<float>(3);
@@ -55,6 +53,7 @@ namespace test
 	void CubeTest::OnRenderer()
 	{
 		Renderer render;
+		render.Clear();
 		{
 			m_keyHandler.handleKey(m_rotates);
 			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
@@ -66,13 +65,13 @@ namespace test
 			float opacity = 1.0f;
 			for(auto& trans : cubicMvps.getTransformations())
 			{
-				if (count == 1 or count == 0)
-					opacity = 1.0f;
-				else
-					opacity = 0.2;
-				count++;
+				//if (count == 1 or count == 0)
+				//	opacity = 1.0f;
+				//else
+				//	opacity = 0.2;
+				//count++;
 				m_shader->SetUniformMat4f("u_MVP", trans);
-				m_shader->SetUniform1f("opacity", opacity);
+				m_shader->SetUniform1f("opacity", 1.0f);
 				render.Draw(*m_va, *m_ib, *m_shader);
 			}
 		}

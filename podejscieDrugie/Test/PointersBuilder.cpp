@@ -70,18 +70,14 @@ void PointersBuilder::addCubeBoarders()
 	{
 		if (i % 7 < 2)
 		{
-			//std::cout << i << ", " << i % 7 << "previous point: " << m_points[i] << ", and point from old:" << m_points[i - floatsInCube];
 			m_points[i] = m_points[i - floatsInCube] * 0.8f;
-			//std::cout << ", new point:" << m_points[i] << std::endl;
 		}
 		else if (i % 7 == 6)
 		{
-			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = 1.0f;//m_points[i - floatsInCube];
+			m_points[i] = 1.0f;
 		}
 		else
 		{
-			//std::cout << "else: " << i << ", " << i % 7 << std::endl;
 			m_points[i] = m_points[i - floatsInCube];
 		}
 	}
@@ -90,18 +86,14 @@ void PointersBuilder::addCubeBoarders()
 	{
 		if (i % 7 == 1 || i % 7 == 2)
 		{
-			//std::cout << i << ", " << i % 7 << "previous point: " << m_points[i] << ", and point from old:" << m_points[i - floatsInCube];
 			m_points[i] = m_points[i - floatsInCube] * 0.8f;
-			//std::cout << ", new point:" << m_points[i] << std::endl;
 		}
 		else if (i % 7 == 6)
 		{
-			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = 1.0f;//m_points[i - floatsInCube];
+			m_points[i] = 1.0f;
 		}
 		else
 		{
-			//std::cout << "else: " << i << ", " << i % 7 << std::endl;
 			m_points[i] = m_points[i - floatsInCube];
 		}
 	}
@@ -110,18 +102,14 @@ void PointersBuilder::addCubeBoarders()
 	{
 		if (i % 7 == 0 || i % 7 == 2)
 		{
-			//std::cout << i << ", " << i % 7 << "previous point: " << m_points[i] << ", and point from old:" << m_points[i - floatsInCube];
 			m_points[i] = m_points[i - floatsInCube] * 0.8f;
-			//std::cout << ", new point:" << m_points[i] << std::endl;
 		}
 		else if (i % 7 == 6)
 		{
-			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = 1.0f;//m_points[i - floatsInCube];
+			m_points[i] = 1.0f;
 		}
 		else
 		{
-			//std::cout << "else: " << i << ", " << i % 7 << std::endl;
 			m_points[i] = m_points[i - floatsInCube];
 		}
 	}
@@ -134,18 +122,14 @@ void PointersBuilder::addInsideCubeBoarders()
 	{
 		if (i % 7 < 3)
 		{
-			//std::cout << i << ", " << i % 7 << "previous point: " << m_points[i] << ", and point from old:" << m_points[i - (floatsInCube * 2)];
 			m_points[i] = m_points[i - (floatsInCube)];
-			//std::cout << ", new point:" << m_points[i] << std::endl;
 		}
 		else if (i % 7 == 6)
 		{
-			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = 1.0f;// m_points[i - floatsInCube];
+			m_points[i] = 1.0f;
 		}
 		else
 		{
-			//std::cout << "else: " << i << ", " << i % 7 << std::endl;
 			m_points[i] = 0.0f;
 		}
 	}
@@ -158,18 +142,13 @@ void PointersBuilder::convertOutsideCubeBoarders()
 	{
 		if (i % 7 < 3)
 		{
-			//std::cout << i << ", " << i % 7 << "previous point: " << m_points[i] << ", and point from old:" << m_points[i - floatsInCube];
-			m_points[i] = m_points[i];
-			//std::cout << ", new point:" << m_points[i] << std::endl;
 		}
 		else if (i % 7 == 6)
 		{
-			//std::cout << "don't touch: " << i << ", " << i % 7 << std::endl;
-			m_points[i] = 1.0f;// m_points[i - floatsInCube];
+			m_points[i] = 1.0f;
 		}
 		else
 		{
-			//std::cout << "else: " << i << ", " << i % 7 << std::endl;
 			m_points[i] = 0.0f;;
 		}
 	}

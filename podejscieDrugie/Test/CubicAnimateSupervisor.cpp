@@ -16,22 +16,16 @@ void CubicAnimateSupervisor::ping()
 {
 	if (m_rotates.empty() and stepCounter == 0)
 	{
-		//std::cout << "empty rotator; break" << std::endl;
 		return;
 	}
 	if (stepCounter == 0)
 	{
-		//std::cout << "set rotator" << std::endl;
-		//m_cubicMvps.setRotator(m_rotators.front());
 		m_cubicMvps.setRotators(m_rotates.front());
 		m_rotates.pop();
-		//m_rotators.pop();
 	}
-	//std::cout << "make move" << std::endl;
 	m_cubicMvps.stepMove();
 	if (stepCounter == 9)
 	{
-		//std::cout << "last move" << std::endl;
 		m_cubicMvps.moveLast();
 		m_cubicMvps.setRotators(m_emptyRotation);
 		stepCounter = 0;
