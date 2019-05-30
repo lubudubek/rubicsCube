@@ -11,14 +11,13 @@ int main() {
 		
 		if (currentTest)
 		{
-			currentTest->OnUpdate(0.0f);
-			currentTest->OnRenderer();
-
 			auto resetCurrentTest = [&currentTest]()
 				{
 					delete currentTest;
 					currentTest = new test::CubeTest;
 				};
+			currentTest->OnUpdate(0.0f);
+			currentTest->OnRenderer();
 
 			imGuiProxy.drawGui(currentTest,
 							   resetCurrentTest);

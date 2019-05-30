@@ -8,6 +8,7 @@
 #include "KeyHandler.hpp"
 #include "PointersBuilder.hpp"
 #include "IndeciesBuilder.hpp"
+//#include "Finders/BlankRotattionFinder.h"
 
 //#define _USE_MATH_DEFINES
 
@@ -18,7 +19,8 @@ namespace test
 		:	m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 			m_view(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
 			cubicMvps(m_onlineParams),
-		    m_keyHandler()
+			m_rotationFinder(std::make_shared<RealRotationFinder>(m_rotates, cubicMvps)),
+		    m_keyHandler(m_rotationFinder, m_rotates, m_rotatesHistory)
 	{
 		PointersBuilder pointerBuilder;
 		IndeciesBuilder indeciesBuilder;
@@ -35,8 +37,9 @@ namespace test
 		m_va->AddBuffer(*m_vb, *m_layout);
 
 		m_shader->Bind();
-
-		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(cubicMvps, m_rotates);
+		
+		m_cubicSupervisor = std::make_unique<CubicAnimateSupervisor>(
+			cubicMvps, m_rotates, m_rotatesHistory, m_rotationFinder);
 	}
 
 	CubeTest::~CubeTest()
@@ -55,25 +58,31 @@ namespace test
 		Renderer render;
 		render.Clear();
 		{
-			m_keyHandler.handleKey(m_rotates);
-			//m_rotationFinder.findNextRotationSet(m_rotators, cubicMvps);
+			m_keyHandler.handleKey();
+		   
 			m_cubicSupervisor->ping();
 			cubicMvps.handleCamera();
 			m_shader->Bind();
 
-			int count = 0;
-			float opacity = 1.0f;
-			for(auto& trans : cubicMvps.getTransformations())
+			for (auto& cubic : cubicMvps.getCubics())
 			{
-				//if (count == 1 or count == 0)
-				//	opacity = 1.0f;
-				//else
-				//	opacity = 0.2;
-				//count++;
-				m_shader->SetUniformMat4f("u_MVP", trans);
-				m_shader->SetUniform1f("opacity", 1.0f);
-				render.Draw(*m_va, *m_ib, *m_shader);
+				if(cubic.getOpacity() > 0.9f)
+				{
+					m_shader->SetUniformMat4f("u_MVP", cubic.getTransformation());
+					m_shader->SetUniform1f("opacity", cubic.getOpacity());
+					render.Draw(*m_va, *m_ib, *m_shader);
+				}
 			}
+			for (auto& cubic : cubicMvps.getCubics())
+			{
+				if (cubic.getOpacity() < 0.9f)
+				{
+					m_shader->SetUniformMat4f("u_MVP", cubic.getTransformation());
+					m_shader->SetUniform1f("opacity", cubic.getOpacity());
+					render.Draw(*m_va, *m_ib, *m_shader);
+				}
+			}
+
 		}
 	}
 

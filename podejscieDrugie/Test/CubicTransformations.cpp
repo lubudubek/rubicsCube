@@ -72,6 +72,11 @@ std::vector<glm::mat4> CubicTransformations::getTransformations()
 	return transformations;
 }
 
+std::vector<Cubic>& CubicTransformations::getCubics()
+{
+	return m_transformations;
+}
+
 std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> CubicTransformations::getPositions()
 {
 	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> result;

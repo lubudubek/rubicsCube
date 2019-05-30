@@ -19,10 +19,14 @@ glm::mat4 Cubic::getTransformation() const
 	return commonTransformation * m_transformation;
 }
 
-void Cubic::addTransformation(glm::mat4 addedTransformation)
+float Cubic::getOpacity()
 {
-	m_transformation = addedTransformation * glm::inverse(commonTransformation) * m_transformation;
-	commonTransformation = addedTransformation;
+	return m_opacity;
+}
+
+void Cubic::setOpacity(float opacity)
+{
+	m_opacity = opacity;
 }
 
 void Cubic::initiateTransformation(glm::mat4 addedTransformation)
@@ -37,9 +41,7 @@ void Cubic::rotateOnAxis(float angle, glm::vec3 axis)
 
 void Cubic::rotate()
 {
-	//std::cout << "rotate in cubic" << std::endl;
 	m_rotator->performRotation(m_transformation);
-	//m_transformation = m_rotator->getRotationMatrix * m_transformation;
 }
 
 std::vector<Position>& Cubic::getPosition()
@@ -62,32 +64,11 @@ void Cubic::rotatePosition()
 {
 	m_rotator->rotatePosition(m_positions);
 }
-//	for (auto& position : m_positions)
-//	{
-//		for (int i = 0; i < rotation.size(); i++)
-//		{
-//			if (rotation[i] == position)
-//			{
-//				position = rotation[(i + direction) % 4];
-//				break;
-//			}
-//		}
-//	}
-//}
 
-//void Cubic::rotatePosition()
-//{
-//	auto rotation = m_rotator->getPositionSequence;
-//	auto direction = m_rotator->getDirection;
-//	for (auto& position : m_positions)
-//	{
-//		for (int i = 0; i < rotation.size(); i++)
-//		{
-//			if (rotation[i] == position)
-//			{
-//				position = rotation[(i + direction) % 4];
-//				break;
-//			}
-//		}
-//	}
-//}
+Position Cubic::getPositionOfInitial(Position initialPosition)
+{
+	return m_positions[std::distance(m_initialPositions.begin(),
+									 std::find(m_initialPositions.begin(),
+											   m_initialPositions.end(),
+											   initialPosition))];
+}

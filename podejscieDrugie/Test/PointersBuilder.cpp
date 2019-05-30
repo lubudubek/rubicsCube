@@ -3,11 +3,11 @@
 
 namespace
 {
-	const int floatsInVertex = 7;
-	const int pointsInSquare = 4;
-	const int surfacesInCube = 6;
+	constexpr int floatsInVertex = 7;
+	constexpr int pointsInSquare = 4;
+	constexpr int surfacesInCube = 6;
 
-	const int floatsInCube = floatsInVertex * pointsInSquare * surfacesInCube;
+	constexpr int floatsInCube = floatsInVertex * pointsInSquare * surfacesInCube;
 }
 
 PointersBuilder::PointersBuilder()
@@ -31,25 +31,25 @@ float* PointersBuilder::getPoints()
 void PointersBuilder::setInitialCubePoints()
 {
 	m_points = {
-		-0.5f, -0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,  // back
-		 0.5f, -0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,  // back
+		 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
 
 		-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,  // front
 		 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
 		 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
 		-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
 											   
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,  // right
-		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,  // left
+		-0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
 											   
-		 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,  // left
-		 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,  // right
+		 0.5f,  0.5f, -0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f, 1.0f, 0.23f, 0.0f, 1.0f,
 											   
 		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,  // bottom
 		 0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,

@@ -43,6 +43,7 @@ public:
 	void handleCamera();
 	void setRotators(std::shared_ptr<IRotation>);
 	std::vector<std::tuple<const std::vector<Position>&, const std::vector<Position>&>> getPositions();
+	std::vector<Cubic>& getCubics();
 
 	void moveLast();
 	void stepMove();
