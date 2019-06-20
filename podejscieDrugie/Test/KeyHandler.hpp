@@ -19,11 +19,8 @@ private:
 	void makeRandomMoves();
 	void undo();
 	void clearQueueAndAdjustHistory();
-	//std::map<Rotation1, Rotation1> opositeRotationMap;
 
-	//std::shared_ptr<IFinder> m_blancFinder;
 	std::shared_ptr<IFinder>& m_realFinder;
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_rotatesHistory;
-	//std::shared_ptr<IFinder>& m_rotationFinder;
 };

@@ -3,11 +3,13 @@
 #include "WhiteGreenEdgeSolver.h"
 #include <iostream>
 #include "SolutionsFactory.h"
+#include <stack>
 
 RealRotationFinder::RealRotationFinder(std::queue<std::shared_ptr<IRotation>>& p_rotates,
+									   std::stack<std::shared_ptr<IRotation>>& p_historyRotates,
 									   CubicTransformations& p_cubicMvps)
 {
-	SolutionsFactory solutionFactory(p_rotates, p_cubicMvps, *this);
+	SolutionsFactory solutionFactory(p_rotates, p_historyRotates, p_cubicMvps, *this);
 	std::vector<Position> l_temp = { Position::BOTTOM, Position::FRONT };
 	m_solvers.reserve(10);
 	m_solvers.emplace_back(solutionFactory.createEmptySolution());
@@ -17,6 +19,11 @@ RealRotationFinder::RealRotationFinder(std::queue<std::shared_ptr<IRotation>>& p
 	m_solvers.emplace_back(solutionFactory.createWhiteOrangeEdgeSolution());
 	m_solvers.emplace_back(solutionFactory.createWhiteBlueEdgeSolution());
 	m_solvers.emplace_back(solutionFactory.createWhiteRedEdgeSolution());
+
+	m_solvers.emplace_back(solutionFactory.createWhiteGreenOrangeCornerSolution());
+	m_solvers.emplace_back(solutionFactory.createWhiteGreenRedCornerSolution());
+	m_solvers.emplace_back(solutionFactory.createWhiteBlueOrangeCornerSolution());
+	m_solvers.emplace_back(solutionFactory.createWhiteBlueRedCornerSolution());
 
 	m_solvers.emplace_back(solutionFactory.createLastSolution());
 

@@ -19,7 +19,7 @@ namespace test
 		:	m_proj(glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f)),
 			m_view(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0))),
 			cubicMvps(m_onlineParams),
-			m_rotationFinder(std::make_shared<RealRotationFinder>(m_rotates, cubicMvps)),
+			m_rotationFinder(std::make_shared<RealRotationFinder>(m_rotates, m_rotatesHistory, cubicMvps)),
 		    m_keyHandler(m_rotationFinder, m_rotates, m_rotatesHistory)
 	{
 		PointersBuilder pointerBuilder;

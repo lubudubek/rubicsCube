@@ -7,22 +7,19 @@
 #include "IFinder.h"
 #include "../PositionTypes.hpp"
 #include <map>
-#include <stack>
 
-class WhiteGreenEdgeSolver : public ISolver
+class WhiteCornersSolver : public ISolver
 {
 public:
-	WhiteGreenEdgeSolver(std::queue<std::shared_ptr<IRotation>>& p_rotates,
-		                 std::stack<std::shared_ptr<IRotation>>& p_historyRrotates,
+	WhiteCornersSolver(std::queue<std::shared_ptr<IRotation>>& p_rotates,
 	   					 CubicTransformations& p_cubicMvps,
 						 IFinder& solverContainer,
 				 		 std::vector<Position> positions,
 				 		 std::map<std::vector<Position>, std::vector<Rotation1>> rotationsMap);
-	virtual ~WhiteGreenEdgeSolver();
+	virtual ~WhiteCornersSolver();
 	void findRotations() override;
 private:
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
-	std::stack<std::shared_ptr<IRotation>>& m_historyRrotates;
 	CubicTransformations& m_cubicMvps;
 	IFinder& m_solverContainer;
 	std::map<Rotation1, std::shared_ptr<IRotation>> allRotations;

@@ -47,7 +47,7 @@ void KeyHandler::pushToEmptyQueue(Rotation1 rotation)
 	clearQueueAndAdjustHistory();
 	m_rotates.push(allRotations.at(rotation));
 	m_rotatesHistory.push(allRotations.at(opositeRotationMap.at(rotation)));
-	std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history" << std::endl;
+	//std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history" << std::endl;
 	m_realFinder->setInitialState();
 	std::cout << rotation << std::endl;
 }
@@ -56,12 +56,12 @@ void KeyHandler::clearQueueAndAdjustHistory()
 {
 	for (int i = 0; i < m_rotates.size(); i++)
 	{
-		std::cout << std::endl << "Pop from history" << std::endl;
+		//std::cout << std::endl << "Pop from history" << std::endl;
 		m_rotatesHistory.pop();
 	}
 	std::queue<std::shared_ptr<IRotation>> empty;
 	m_rotates.swap(empty);
-	std::cout << "Empty regular queue" << std::endl;
+	//std::cout << "Empty regular queue" << std::endl;
 }
 
 void KeyHandler::makeRandomMoves()
@@ -74,7 +74,7 @@ void KeyHandler::makeRandomMoves()
 			static_cast<Rotation1>(1 + (rand() % (static_cast<int>(Rotation1::CENTER_Y_ROTATE_LEFT))));
 		m_rotates.push(allRotations.at(rotation));
 		m_rotatesHistory.push(allRotations.at(opositeRotationMap.at(rotation)));
-		std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history";
+		//std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history";
 	}
 }
 
@@ -85,7 +85,7 @@ void KeyHandler::undo()
 		clearQueueAndAdjustHistory();
 		m_rotates.push(m_rotatesHistory.top());
 		m_rotatesHistory.pop();
-		std::cout << "Pop from history" << std::endl;
+		//std::cout << "Pop from history" << std::endl;
 	}
 }
 

@@ -37,21 +37,21 @@ namespace Solution
 
 		{ {Position::RIGHT, Position::FRONT},  {Rotation1::FRONT_ROTATE_RIGHT} },
 		{ {Position::RIGHT, Position::BACK},   {Rotation1::BACK_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_RIGHT} },
-		{ {Position::RIGHT, Position::TOP},    {Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::FRONT_ROTATE_RIGHT} },
+		{ {Position::RIGHT, Position::TOP},    {Rotation1::RIGHT_ROTATE_DOWN, Rotation1::FRONT_ROTATE_RIGHT} },
 		{ {Position::RIGHT, Position::BOTTOM}, {Rotation1::RIGHT_ROTATE_UP, Rotation1::FRONT_ROTATE_RIGHT} },
 
 		{ {Position::LEFT, Position::FRONT},  {Rotation1::FRONT_ROTATE_LEFT} },
 		{ {Position::LEFT, Position::BACK},   {Rotation1::BACK_ROTATE_LEFT, Rotation1::BOTTOM_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_RIGHT} },
-		{ {Position::LEFT, Position::TOP},    {Rotation1::TOP_ROTATE_RIGHT, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::FRONT_ROTATE_RIGHT} },
+		{ {Position::LEFT, Position::TOP},    {Rotation1::LEFT_ROTATE_DOWN, Rotation1::FRONT_ROTATE_LEFT} },
 		{ {Position::LEFT, Position::BOTTOM}, {Rotation1::LEFT_ROTATE_UP, Rotation1::FRONT_ROTATE_LEFT} },
 
-		{ {Position::FRONT, Position::TOP},    {Rotation1::BACK_ROTATE_RIGHT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_LEFT} },
+		{ {Position::FRONT, Position::TOP},    {Rotation1::FRONT_ROTATE_RIGHT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_RIGHT} },
 		{ {Position::FRONT, Position::BOTTOM}, {Rotation1::FRONT_ROTATE_LEFT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_RIGHT} },
 		{ {Position::FRONT, Position::LEFT},   {Rotation1::LEFT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_LEFT} },
 		{ {Position::FRONT, Position::RIGHT},  {Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_RIGHT} },
-
-		{ {Position::BACK, Position::TOP},    {Rotation1::FRONT_ROTATE_RIGHT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_LEFT} },
-		{ {Position::BACK, Position::BOTTOM}, {Rotation1::BACK_ROTATE_LEFT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::BOTTOM_ROTATE_LEFT} },
+		//
+		{ {Position::BACK, Position::TOP},    {Rotation1::TOP_ROTATE_RIGHT,  Rotation1::RIGHT_ROTATE_DOWN, Rotation1::FRONT_ROTATE_RIGHT} },
+		{ {Position::BACK, Position::BOTTOM}, {Rotation1::BACK_ROTATE_LEFT,  Rotation1::RIGHT_ROTATE_UP, Rotation1::BOTTOM_ROTATE_RIGHT} },
 		{ {Position::BACK, Position::LEFT},   {Rotation1::LEFT_ROTATE_UP, Rotation1::BOTTOM_ROTATE_LEFT} },
 		{ {Position::BACK, Position::RIGHT},  {Rotation1::RIGHT_ROTATE_UP, Rotation1::BOTTOM_ROTATE_RIGHT} }
 	};
@@ -61,20 +61,20 @@ namespace Solution
 		{ {Position::BOTTOM, Position::FRONT}, {} }, // already fixed another cubic - error!
 		{ {Position::BOTTOM, Position::BACK},  {Rotation1::BACK_ROTATE_RIGHT, Rotation1::BACK_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP } },
 		{ {Position::BOTTOM, Position::RIGHT}, {} },
-		{ {Position::BOTTOM, Position::LEFT},  {Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP } },
+		{ {Position::BOTTOM, Position::LEFT},  {Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN } },
 
-		{ {Position::TOP, Position::FRONT}, {Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
-		{ {Position::TOP, Position::BACK},  {Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
-		{ {Position::TOP, Position::RIGHT}, {Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
-		{ {Position::TOP, Position::LEFT},  {Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
+		{ {Position::TOP, Position::FRONT}, {Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
+		{ {Position::TOP, Position::BACK},  {Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
+		{ {Position::TOP, Position::RIGHT}, {Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
+		{ {Position::TOP, Position::LEFT},  {Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
 
 		{ {Position::RIGHT, Position::FRONT},  {Rotation1::FRONT_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT} },
-		{ {Position::RIGHT, Position::BACK},   {Rotation1::BACK_ROTATE_LEFT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
+		{ {Position::RIGHT, Position::BACK},   {Rotation1::BACK_ROTATE_LEFT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
 		{ {Position::RIGHT, Position::TOP},    {Rotation1::RIGHT_ROTATE_DOWN, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT} },
 		{ {Position::RIGHT, Position::BOTTOM}, {Rotation1::RIGHT_ROTATE_UP, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT} },
 
 		{ {Position::LEFT, Position::FRONT},  {Rotation1::FRONT_ROTATE_LEFT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::FRONT_ROTATE_RIGHT } },
-		{ {Position::LEFT, Position::BACK},   {Rotation1::BACK_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::RIGHT_ROTATE_UP} },
+		{ {Position::LEFT, Position::BACK},   {Rotation1::BACK_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::RIGHT_ROTATE_DOWN} },
 		{ {Position::LEFT, Position::TOP},    {Rotation1::TOP_ROTATE_RIGHT, Rotation1::BACK_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP} },
 		{ {Position::LEFT, Position::BOTTOM}, {Rotation1::LEFT_ROTATE_UP, Rotation1::FRONT_ROTATE_LEFT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::FRONT_ROTATE_RIGHT} },
 
@@ -129,9 +129,9 @@ namespace Solution
 		{ {Position::BOTTOM, Position::RIGHT}, {} }, // already fixed another cubic - error!
 		{ {Position::BOTTOM, Position::LEFT},  { } },
 
-		{ {Position::TOP, Position::FRONT}, { Rotation1::BOTTOM_ROTATE_RIGHT, Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP} },
-		{ {Position::TOP, Position::BACK},  { Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP } },
-		{ {Position::TOP, Position::RIGHT}, { Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::BOTTOM_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP } },
+		{ {Position::TOP, Position::FRONT}, { Rotation1::TOP_ROTATE_RIGHT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::LEFT_ROTATE_DOWN} },
+		{ {Position::TOP, Position::BACK},  { Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::LEFT_ROTATE_DOWN } },
+		{ {Position::TOP, Position::RIGHT}, { Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::LEFT_ROTATE_DOWN } },
 		{ {Position::TOP, Position::LEFT},  {  Rotation1::LEFT_ROTATE_UP, Rotation1::LEFT_ROTATE_UP} },
 
 		{ {Position::RIGHT, Position::FRONT},  {Rotation1::CENTER_Y_ROTATE_RIGHT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::CENTER_Y_ROTATE_LEFT } },

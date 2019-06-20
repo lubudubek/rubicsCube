@@ -6,12 +6,14 @@
 #include <queue>
 #include "../Rotators/IRotation.hpp"
 class CubicTransformations;
+#include <stack>
 
 class RealRotationFinder : public IFinder
 {
 public:
 	RealRotationFinder(std::queue<std::shared_ptr<IRotation>>& p_rotates,
-						CubicTransformations& p_cubicMvps);
+					   std::stack<std::shared_ptr<IRotation>>& p_historyRotates,
+					   CubicTransformations& p_cubicMvps);
 	void findNextRotationSet() override;
 	void setNextState() override;
 	void setInitialState() override;
