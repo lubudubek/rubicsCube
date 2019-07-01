@@ -19,7 +19,7 @@ int main() {
 			currentTest->OnUpdate(0.0f);
 			currentTest->OnRenderer();
 
-			imGuiProxy.drawGui(currentTest,
+			imGuiProxy.drawGui(*currentTest,
 							   resetCurrentTest);
 		}
 		glProxy.updateWindow();

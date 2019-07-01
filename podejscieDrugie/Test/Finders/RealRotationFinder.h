@@ -16,6 +16,7 @@ public:
 					   CubicTransformations& p_cubicMvps);
 	void findNextRotationSet() override;
 	void setNextState() override;
+	void setPreviousState() override;
 	void setInitialState() override;
 	virtual ~RealRotationFinder();
 

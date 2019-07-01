@@ -5,32 +5,6 @@
 #include "Rotators/IRotation.hpp"
 #include "AvaliableRotatorsFactory.hpp"
 
-namespace {
-	std::map<Rotation1, Rotation1> opositeRotationMap
-	{
-		{Rotation1::FRONT_ROTATE_RIGHT,     Rotation1::FRONT_ROTATE_LEFT	 },
-		{Rotation1::FRONT_ROTATE_LEFT,		Rotation1::FRONT_ROTATE_RIGHT	 },
-		{Rotation1::BACK_ROTATE_RIGHT,		Rotation1::BACK_ROTATE_LEFT	 },
-		{Rotation1::BACK_ROTATE_LEFT,		Rotation1::BACK_ROTATE_RIGHT		 },
-		{Rotation1::CENTER_Z_ROTATE_RIGHT,	Rotation1::CENTER_Z_ROTATE_LEFT },
-		{Rotation1::CENTER_Z_ROTATE_LEFT,	Rotation1::CENTER_Z_ROTATE_RIGHT	 },
-
-		{Rotation1::LEFT_ROTATE_DOWN,		Rotation1::LEFT_ROTATE_UP		 },
-		{Rotation1::LEFT_ROTATE_UP,			Rotation1::LEFT_ROTATE_DOWN		 },
-		{Rotation1::RIGHT_ROTATE_DOWN,		Rotation1::RIGHT_ROTATE_UP	 },
-		{Rotation1::RIGHT_ROTATE_UP,		Rotation1::RIGHT_ROTATE_DOWN		 },
-		{Rotation1::CENTER_X_ROTATE_DOWN,	Rotation1::CENTER_X_ROTATE_UP	 },
-		{Rotation1::CENTER_X_ROTATE_UP,		Rotation1::CENTER_X_ROTATE_DOWN	 },
-
-		{Rotation1::BOTTOM_ROTATE_RIGHT,	Rotation1::BOTTOM_ROTATE_LEFT	 },
-		{Rotation1::BOTTOM_ROTATE_LEFT,		Rotation1::BOTTOM_ROTATE_RIGHT	 },
-		{Rotation1::TOP_ROTATE_RIGHT,		Rotation1::TOP_ROTATE_LEFT 	 },
-		{Rotation1::TOP_ROTATE_LEFT,		Rotation1::TOP_ROTATE_RIGHT 		 },
-		{Rotation1::CENTER_Y_ROTATE_RIGHT,	Rotation1::CENTER_Y_ROTATE_LEFT },
-		{Rotation1::CENTER_Y_ROTATE_LEFT,	Rotation1::CENTER_Y_ROTATE_RIGHT	 }
-	};
-}
-
 KeyHandler::KeyHandler(std::shared_ptr<IFinder>& finder,
 	std::queue<std::shared_ptr<IRotation>>& rotates,
 	std::stack<std::shared_ptr<IRotation>>& rotatesHistory) :
@@ -46,10 +20,19 @@ void KeyHandler::pushToEmptyQueue(Rotation1 rotation)
 {
 	clearQueueAndAdjustHistory();
 	m_rotates.push(allRotations.at(rotation));
-	m_rotatesHistory.push(allRotations.at(opositeRotationMap.at(rotation)));
-	//std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history" << std::endl;
+	m_rotatesHistory.push(allRotations.at(opositeRotationsMap.at(rotation)));
 	m_realFinder->setInitialState();
 	std::cout << rotation << std::endl;
+}
+void KeyHandler::pushToEmptyQueue(std::vector<Rotation1> rotations)
+{
+	clearQueueAndAdjustHistory();
+	for (auto rotation : rotations)
+	{
+		m_rotates.push(allRotations.at(rotation));
+		m_rotatesHistory.push(allRotations.at(opositeRotationsMap.at(rotation)));
+	}
+	m_realFinder->setInitialState();
 }
 
 void KeyHandler::clearQueueAndAdjustHistory()
@@ -73,8 +56,7 @@ void KeyHandler::makeRandomMoves()
 		Rotation1 rotation =
 			static_cast<Rotation1>(1 + (rand() % (static_cast<int>(Rotation1::CENTER_Y_ROTATE_LEFT))));
 		m_rotates.push(allRotations.at(rotation));
-		m_rotatesHistory.push(allRotations.at(opositeRotationMap.at(rotation)));
-		//std::cout << "Added " << rotation << " to regular queue, and " << opositeRotationMap.at(rotation) << " to history";
+		m_rotatesHistory.push(allRotations.at(opositeRotationsMap.at(rotation)));
 	}
 }
 
@@ -164,6 +146,14 @@ void KeyHandler::handleKey()
 	{
 		pushToEmptyQueue(Rotation1::TOP_ROTATE_LEFT);
 	}
+	if (ImGui::IsKeyPressed(73)) // i
+	{
+		pushToEmptyQueue(Rotation1::Y_ROTATE_LEFT);
+	}
+	if (ImGui::IsKeyPressed(79)) // o
+	{
+		pushToEmptyQueue(Rotation1::Y_ROTATE_RIGHT);
+	}
 	if (ImGui::IsKeyPressed(71)) // g (?)
 	{
 		m_realFinder->setNextState();
@@ -174,6 +164,45 @@ void KeyHandler::handleKey()
 	{
 		makeRandomMoves();
 		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(80)) // p
+	{
+		pushToEmptyQueue({ Rotation1::CENTER_X_ROTATE_UP, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::CENTER_X_ROTATE_DOWN });
+		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(76)) // l
+	{
+		pushToEmptyQueue({ Rotation1::CENTER_X_ROTATE_UP, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::CENTER_X_ROTATE_DOWN });
+		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(59)) // ;
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_RIGHT, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT});
+		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(91)) // [
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP,
+			Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN });
+		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(93)) // ]
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP,
+			Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_DOWN });
+	}
+	if (ImGui::IsKeyPressed(44)) // <
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT,
+			Rotation1::RIGHT_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT,
+			Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_DOWN });
+		// todo? someSequence
+	}
+	if (ImGui::IsKeyPressed(46)) // >
+	{
+		pushToEmptyQueue({ Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN,
+			Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN,
+			Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT });
 	}
 	if (ImGui::IsKeyPressed(85)) // u
 	{

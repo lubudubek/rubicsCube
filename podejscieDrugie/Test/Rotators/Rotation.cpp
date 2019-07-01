@@ -28,6 +28,10 @@ bool Rotation::isApplicable(const std::vector<Position>& cubicPos)
 		return isCubicOnAxis(cubicPos, { m_rotatedPosition });
 	return isCubicNotOnAxis(cubicPos, m_notRotatedPositions);
 }
+void Rotation::rotateInitPosition(std::vector<Position>&)
+{
+}
+
 void Rotation::rotatePosition(std::vector<Position>& positions)
 {
 	for (auto& position : positions)

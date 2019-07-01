@@ -25,6 +25,15 @@ RealRotationFinder::RealRotationFinder(std::queue<std::shared_ptr<IRotation>>& p
 	m_solvers.emplace_back(solutionFactory.createWhiteBlueOrangeCornerSolution());
 	m_solvers.emplace_back(solutionFactory.createWhiteBlueRedCornerSolution());
 
+	m_solvers.emplace_back(solutionFactory.createSecondLayerEdgeSolution());
+	m_solvers.emplace_back(solutionFactory.createSecondLayerEdgeFinalSolution());
+	m_solvers.emplace_back(solutionFactory.createYellowCrossSolution());
+	m_solvers.emplace_back(solutionFactory.createYellowCrossPermutationSolution());
+	m_solvers.emplace_back(solutionFactory.createYellowCornersSetSolution());
+	m_solvers.emplace_back(solutionFactory.createYellowCornersPermutationSolution());
+	m_solvers.emplace_back(solutionFactory.createFinalPermutationSolution());
+
+
 	m_solvers.emplace_back(solutionFactory.createLastSolution());
 
 	m_currentSolver = m_solvers.begin();
@@ -35,6 +44,12 @@ void RealRotationFinder::setNextState()
 	m_currentSolver++;
 	if (m_currentSolver == m_solvers.end())
 		m_currentSolver = m_solvers.begin();
+}
+
+void RealRotationFinder::setPreviousState()
+{
+	if (m_currentSolver != m_solvers.begin())
+		m_currentSolver--;
 }
 
 void RealRotationFinder::setInitialState()

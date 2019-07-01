@@ -12,3 +12,8 @@ void NoRotation::rotatePosition(std::vector<Position>& position)
 {
 
 }
+
+void NoRotation::rotateInitPosition(std::vector<Position>& position)
+{
+
+}

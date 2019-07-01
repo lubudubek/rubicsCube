@@ -7,8 +7,8 @@ enum class Position
 {
 	FRONT,
 	BACK,
-	LEFT,
 	RIGHT,
+	LEFT,
 	BOTTOM,
 	TOP
 };
@@ -41,32 +41,13 @@ enum class Rotation1
 	TOP_ROTATE_RIGHT,
 	TOP_ROTATE_LEFT,
 	CENTER_Y_ROTATE_RIGHT,
-	CENTER_Y_ROTATE_LEFT
+	CENTER_Y_ROTATE_LEFT,
+
+	Y_ROTATE_LEFT,
+	Y_ROTATE_RIGHT
 };
 
-//std::map<Rotation1, Rotation1> opositeRotationMap
-//{
-//	{Rotation1::FRONT_ROTATE_RIGHT,     Rotation1::FRONT_ROTATE_LEFT	 },
-//	{Rotation1::FRONT_ROTATE_LEFT,		Rotation1::FRONT_ROTATE_RIGHT	 },
-//	{Rotation1::BACK_ROTATE_RIGHT,		Rotation1::BACK_ROTATE_LEFT	 },
-//	{Rotation1::BACK_ROTATE_LEFT,		Rotation1::BACK_ROTATE_RIGHT		 },
-//	{Rotation1::CENTER_Z_ROTATE_RIGHT,	Rotation1::CENTER_Z_ROTATE_LEFT },
-//	{Rotation1::CENTER_Z_ROTATE_LEFT,	Rotation1::CENTER_Z_ROTATE_RIGHT	 },
-//																			  
-//	{Rotation1::LEFT_ROTATE_DOWN,		Rotation1::LEFT_ROTATE_UP		 },
-//	{Rotation1::LEFT_ROTATE_UP,			Rotation1::LEFT_ROTATE_DOWN		 },
-//	{Rotation1::RIGHT_ROTATE_DOWN,		Rotation1::RIGHT_ROTATE_UP	 },
-//	{Rotation1::RIGHT_ROTATE_UP,		Rotation1::RIGHT_ROTATE_DOWN		 },
-//	{Rotation1::CENTER_X_ROTATE_DOWN,	Rotation1::CENTER_X_ROTATE_UP	 },
-//	{Rotation1::CENTER_X_ROTATE_UP,		Rotation1::CENTER_X_ROTATE_DOWN	 },
-//																			  
-//	{Rotation1::BOTTOM_ROTATE_RIGHT,	Rotation1::BOTTOM_ROTATE_LEFT	 },
-//	{Rotation1::BOTTOM_ROTATE_LEFT,		Rotation1::BOTTOM_ROTATE_RIGHT	 },
-//	{Rotation1::TOP_ROTATE_RIGHT,		Rotation1::TOP_ROTATE_LEFT 	 },
-//	{Rotation1::TOP_ROTATE_LEFT,		Rotation1::TOP_ROTATE_RIGHT 		 },
-//	{Rotation1::CENTER_Y_ROTATE_RIGHT,	Rotation1::CENTER_Y_ROTATE_LEFT },
-//	{Rotation1::CENTER_Y_ROTATE_LEFT,	Rotation1::CENTER_Y_ROTATE_RIGHT	 }
-//};
+extern std::map<Rotation1, Rotation1> opositeRotationsMap;
 
 inline std::ostream& operator<< (std::ostream& stream, const Position& position)
 {

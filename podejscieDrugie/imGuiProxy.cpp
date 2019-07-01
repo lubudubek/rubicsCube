@@ -17,17 +17,23 @@ ImGuiProxy::~ImGuiProxy()
 	ImGui::DestroyContext();
 }
 
-void ImGuiProxy::drawGui(test::Test* currentTest, std::function<void(void)> resetTest)
+void ImGuiProxy::drawGui(test::Test& currentTest, std::function<void(void)> resetTest)
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	ImGui::Begin("Test");
 	if (ImGui::Button("RESET"))
 	{
-		resetTest();
+		testToReset = true;
+		//resetTest();
 	}
 
-	currentTest->OnImGuiRenderer();
+	currentTest.OnImGuiRenderer();
 	ImGui::End();
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+	if (testToReset)
+	{
+		resetTest();
+		testToReset = false;
+	}
 }

@@ -63,12 +63,39 @@ void Cubic::applyRotator(std::shared_ptr<IRotation> rotator)
 void Cubic::rotatePosition()
 {
 	m_rotator->rotatePosition(m_positions);
+	m_rotator->rotateInitPosition(m_initialPositions);
 }
 
-Position Cubic::getPositionOfInitial(Position initialPosition)
+std::optional<Position> Cubic::getPositionOfInitial(Position initialPosition)
 {
-	return m_positions[std::distance(m_initialPositions.begin(),
-									 std::find(m_initialPositions.begin(),
-											   m_initialPositions.end(),
-											   initialPosition))];
+	auto foundPosition = std::find(m_initialPositions.begin(), m_initialPositions.end(), initialPosition);
+	if (foundPosition == m_initialPositions.end())
+		return std::nullopt;
+	return m_positions[std::distance(m_initialPositions.begin(), foundPosition)];
+}
+
+std::optional<Position> Cubic::getInitialPositionOf(Position currentPosition)
+{
+	auto foundPosition = std::find(m_positions.begin(),	m_positions.end(), currentPosition);
+	if (foundPosition == m_positions.end())
+		return std::nullopt;
+	return m_initialPositions[std::distance(m_positions.begin(), foundPosition)];
+}
+
+std::optional<Position> Cubic::getPositionOtherThan(Position currentPosition)
+{
+	auto foundPosition = std::find_if_not(m_positions.begin(), m_positions.end(), [&](auto pos) {return pos == currentPosition; });
+	if (foundPosition == m_positions.end())
+		return std::nullopt;
+	return m_positions[std::distance(m_positions.begin(), foundPosition)];
+
+}
+
+std::optional<Position> Cubic::getInitPositionOtherThan(Position currentPosition)
+{
+	auto foundPosition = std::find_if_not(m_initialPositions.begin(), m_initialPositions.end(), [&](auto pos) {return pos == currentPosition; });
+	if (foundPosition == m_initialPositions.end())
+		return std::nullopt;
+	return m_initialPositions[std::distance(m_initialPositions.begin(), foundPosition)];
+
 }

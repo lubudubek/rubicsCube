@@ -1,8 +1,16 @@
 #include "SolutionsFactory.h"
 #include "WhiteGreenEdgeSolver.h"
+#include "SecondLayerEdgeSolver.hpp"
+#include "SecondLayerEdgeFinalSolver.hpp"
 #include "SolvingMaps.h"
 #include "CornersSolvingMaps.h"
 #include "EmptySolver.h"
+#include "YellowCrossSolver.h"
+#include "YellowCrossPermutationSolver.h"
+#include "YellowCornerSetSolver.h"
+#include "YellowCornerPermutationSolver.h"
+#include "FinalPermutationSolver.h"
+
 #include "LastSolver.h"
 
 SolutionsFactory::SolutionsFactory(std::queue<std::shared_ptr<IRotation>>& p_rotates,
@@ -135,6 +143,71 @@ std::unique_ptr<ISolver> SolutionsFactory::createWhiteBlueRedCornerSolution()
 		m_solverContainer,
 		l_whiteBlueRedInitPosition,
 		Solution::WhiteBlueRedCornerSolvMap);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createSecondLayerEdgeSolution()
+{
+	return std::make_unique<SecondLayerEdgeSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer,
+		Solution::WhiteBlueRedCornerSolvMap);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createSecondLayerEdgeFinalSolution()
+{
+	return std::make_unique<SecondLayerEdgeFinalSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer,
+		Solution::WhiteBlueRedCornerSolvMap);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createYellowCrossSolution()
+{
+	return std::make_unique<YellowCrossSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createYellowCrossPermutationSolution()
+{
+	return std::make_unique<YellowCrossPermutationSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createFinalPermutationSolution()
+{
+	return std::make_unique<FinalPermutationSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createYellowCornersSetSolution()
+{
+	return std::make_unique<YellowCornerSetSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer);
+}
+
+std::unique_ptr<ISolver> SolutionsFactory::createYellowCornersPermutationSolution()
+{
+	return std::make_unique<YellowCornerPermutationSolver>(
+		m_rotates,
+		m_historyRotates,
+		m_cubicMvps,
+		m_solverContainer);
 }
 
 std::unique_ptr<ISolver> SolutionsFactory::createLastSolution()

@@ -4,6 +4,7 @@
 #include "PositionSwitch.hpp"
 #include "Rotators/Rotation.hpp"
 #include "ICubicToDraw.h"
+#include <optional>
 
 class Cubic : public ICubicToDraw
 {
@@ -36,5 +37,8 @@ public:
 
 	//void rotatePosition(std::vector<Position> rotation, int direction);
 	void rotatePosition();
-	Position getPositionOfInitial(Position initialPosition);
+	std::optional<Position> getPositionOfInitial(Position initialPosition);
+	std::optional<Position> getInitialPositionOf(Position);
+	std::optional<Position> getPositionOtherThan(Position);
+	std::optional<Position> getInitPositionOtherThan(Position);
 };

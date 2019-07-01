@@ -254,4 +254,5 @@ namespace Solution
 		{ {Position::TOP, Position::BACK, Position::LEFT }, // ok
 			{Rotation1::LEFT_ROTATE_DOWN, Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP, Rotation1::BACK_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::BACK_ROTATE_LEFT} },
 	};
+
 }

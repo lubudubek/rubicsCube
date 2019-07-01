@@ -19,7 +19,7 @@ void WhiteCornersSolver::moveByPosition(Cubic& cubic)
 {
 	std::vector<Position> l_tempPos = m_positions;
 	std::transform(l_tempPos.begin(), l_tempPos.end(), l_tempPos.begin(),
-		[&cubic](auto& pos) {return cubic.getPositionOfInitial(pos); });
+		[&cubic](auto& pos) {return *(cubic.getPositionOfInitial(pos)); });
 	std::sort(l_tempPos.begin(), l_tempPos.end());
 	for(auto& rotation : m_rotationsMap.at(l_tempPos))
 		m_rotates.push(allRotations.at(rotation));

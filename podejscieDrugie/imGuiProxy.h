@@ -11,7 +11,9 @@ class ImGuiProxy
 {
 public:
 	ImGuiProxy(GLFWwindow* window);
-	void drawGui(test::Test* currentTest, std::function<void(void)> resetTest);
+	void drawGui(test::Test& currentTest, std::function<void(void)> resetTest);
 	~ImGuiProxy();
+private:
+	bool testToReset{ false };
 };
 

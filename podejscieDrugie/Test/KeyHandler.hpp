@@ -16,6 +16,8 @@ public:
 private:
 	std::map<Rotation1, std::shared_ptr<IRotation>> allRotations;
 	void pushToEmptyQueue(Rotation1);
+	void pushToEmptyQueue(std::vector<Rotation1> rotation);
+
 	void makeRandomMoves();
 	void undo();
 	void clearQueueAndAdjustHistory();

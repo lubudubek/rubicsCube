@@ -1,6 +1,7 @@
 #include "AvaliableRotatorsFactory.hpp"
 #include "PositionTypes.hpp"
 #include "Rotators/Rotation.hpp"
+#include "Rotators/CubeRotation.hpp"
 #include "PositionSwitch.hpp"
 
 std::map<Rotation1, std::shared_ptr<IRotation>> AvaliableRotatorsFactory::createAvaliableRotators()
@@ -26,6 +27,10 @@ std::map<Rotation1, std::shared_ptr<IRotation>> AvaliableRotatorsFactory::create
 		{ Rotation1::TOP_ROTATE_RIGHT, std::make_shared<Rotation>(Direction::BACKWARD, PositionSwitch().getDirectionY(), Position::TOP, std::vector<Position>{ }) },
 		{ Rotation1::TOP_ROTATE_LEFT, std::make_shared<Rotation>(Direction::FORWARD, PositionSwitch().getDirectionY(), Position::TOP, std::vector<Position>{ }) },
 		{ Rotation1::CENTER_Y_ROTATE_RIGHT, std::make_shared<Rotation>(Direction::BACKWARD, PositionSwitch().getDirectionY(), Position::BACK, std::vector<Position>{ Position::TOP, Position::BOTTOM }) },
-		{ Rotation1::CENTER_Y_ROTATE_LEFT, std::make_shared<Rotation>(Direction::FORWARD, PositionSwitch().getDirectionY(), Position::BACK, std::vector<Position>{ Position::TOP, Position::BOTTOM }) }
+		{ Rotation1::CENTER_Y_ROTATE_LEFT, std::make_shared<Rotation>(Direction::FORWARD, PositionSwitch().getDirectionY(), Position::BACK, std::vector<Position>{ Position::TOP, Position::BOTTOM }) },
+
+		{ Rotation1::Y_ROTATE_LEFT, std::make_shared<CubeRotation>(Direction::FORWARD, PositionSwitch().getDirectionY(), Position::BACK, std::vector<Position>{}) },
+		{ Rotation1::Y_ROTATE_RIGHT, std::make_shared<CubeRotation>(Direction::BACKWARD, PositionSwitch().getDirectionY(), Position::BACK, std::vector<Position>{}) }
+
 	};
 }
