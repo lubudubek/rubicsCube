@@ -73,10 +73,23 @@ void KeyHandler::undo()
 
 void KeyHandler::handleKey()
 {
-	if (ImGui::IsKeyPressed(68)) // d
-	{
-		pushToEmptyQueue(Rotation1::RIGHT_ROTATE_DOWN);
-	}
+	
+	//std::cout << std::endl << "MOUSE DRAGGED: x(" << vecMouse5.x << ") y(" << vecMouse5.y << ")";
+	//ImGui::ResetMouseDragDelta(0);
+	//if(ImGui::IsMouseClicked(0))
+	//if(ImGui::IsMouseReleased(0))
+	//{
+	//	auto pos = ImGui::GetMousePos();
+	//	
+	//	std::cout << std::endl << "MOUSE CLICKED pos: x(" << pos.x << ") y(" << pos.y << ")";
+	//	std::cout << std::endl << "MOUSE DRAGGED: x(" << vecMouse5.x << ") y(" << vecMouse5.y << ")";
+	//}
+	//vecMouse5 = ImGui::GetMouseDragDelta(0, 1.0);
+	
+	//if (ImGui::IsKeyPressed(68)) // d
+	//{
+	//	pushToEmptyQueue(Rotation1::RIGHT_ROTATE_DOWN);
+	//}
 	if (ImGui::IsKeyPressed(83)) // s
 	{
 		pushToEmptyQueue(Rotation1::CENTER_X_ROTATE_DOWN);

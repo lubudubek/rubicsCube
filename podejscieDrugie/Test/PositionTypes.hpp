@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
+#include <iosfwd>
 
 enum class Position
 {
@@ -61,7 +63,8 @@ inline std::ostream& operator<< (std::ostream& stream, const Position& position)
 		case Position::BOTTOM: temp = "BOTTOM"; break;
 		case Position::TOP: temp = "TOP"; break;
 	}
-	stream << temp;
+	//std::cout << temp.c_str();
+	stream << temp.c_str();
 	return stream;
 }
 
@@ -70,7 +73,7 @@ inline std::ostream& operator<< (std::ostream& stream, const std::vector<Positio
 	stream << "[ ";
 	for (auto& pos : position)
 		stream << pos << " ";
-	stream << "]";
+	stream << " ]";
 	return stream;
 }
 

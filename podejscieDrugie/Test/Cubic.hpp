@@ -5,6 +5,7 @@
 #include "Rotators/Rotation.hpp"
 #include "ICubicToDraw.h"
 #include <optional>
+#include <memory>
 
 class Cubic : public ICubicToDraw
 {

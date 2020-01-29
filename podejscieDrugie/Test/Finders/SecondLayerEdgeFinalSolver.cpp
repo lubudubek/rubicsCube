@@ -62,7 +62,7 @@ void SecondLayerEdgeFinalSolver::findRotations()
 	std::vector<Position> positionsToSearch = { Position::FRONT, Position::TOP };
 	auto cubic = std::find_if(cubics.begin(), cubics.end(), [&](auto cube)
 	{
-		for_each(cube.getPosition().begin(), cube.getPosition().end(), [](auto pos) {std::cout << pos<<" "; });
+		std::cout << cube.getPosition();
 		
 		return std::is_permutation(cube.getPosition().begin(), cube.getPosition().end(), positionsToSearch.begin(), positionsToSearch.end());
 			});

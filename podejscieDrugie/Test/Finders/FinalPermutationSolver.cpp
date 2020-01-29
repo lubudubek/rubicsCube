@@ -116,7 +116,7 @@ void FinalPermutationSolver::findRotations()
 {
 	std::vector<Position> yellowPos = findYellowEdgePositions();
 	std::cout << std::endl << "YELLOW POSITIONS: ";
-	for_each(yellowPos.begin(), yellowPos.end(), [](auto pos) {std::cout << pos << " "; });
+	std::cout << yellowPos;
 
 	for (auto& rotation : m_rotationsMap.at(yellowPos))
 	{

@@ -42,16 +42,16 @@ CubicTransformations::CubicTransformations(OnlineParams& onlineParams)
 	float m_fovy = 20.0f;
 	float m_fovy1 = 2.0f;
 	float m_fovy2 = 10.0f;
-	glm::mat4 m_proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
-	glm::vec3 m_translationB(0.0f, 0.0f, -6.0f);
+	//glm::mat4 m_proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
+	//glm::vec3 m_translationB(0.0f, 0.0f, -6.0f);
 
-	glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
-	glm::mat4 proj = glm::perspective(m_fovy, float(4 / 3), m_fovy1, m_fovy2);
+	//glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
+	//glm::mat4 proj = glm::perspective(m_fovy, float(4 / 3), m_fovy1, m_fovy2);
 
-	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), 0.3f, glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
+	//glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), 0.3f, glm::vec3(1.0f, 0.0f, 0.0f));
+	//glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
 
-	glm::mat4 commonTrnansformation = m_proj * proj * model1 * rotationx * rotationy;
+	//glm::mat4 commonTrnansformation = m_proj * proj * model1 * rotationx * rotationy;
 
 	initiateCommonTrnasformation(glm::mat4(1.0f));
 }
@@ -118,13 +118,16 @@ glm::mat4 CubicTransformations::prepareCommonTransformation()
 	glm::vec3 m_translationB(0.0f, 0.0f, m_onlineParams.transformZ);
 
 	glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
-	glm::mat4 proj = glm::perspective(m_onlineParams.fovy, float(4 / 3), m_onlineParams.near, m_onlineParams.far);
-
+	glm::mat4 proj = glm::perspective(m_onlineParams.fovy, m_onlineParams.aspect, m_onlineParams.near, m_onlineParams.far);
+	
 	//glm::mat4 m_proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.8f, 2.0f));
+	//glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.8f, 2.0f));
+
+
 	glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
 	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-	return transX * proj * model1 *  rotationx * rotationy *scale;
+	return transX * proj * model1 * rotationx* rotationy;// *scale;
+	//glm::gtx::
 
 }

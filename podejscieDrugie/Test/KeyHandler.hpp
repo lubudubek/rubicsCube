@@ -5,6 +5,8 @@
 #include "Finders/IFinder.h"
 #include "Finders/RealRotationFinder.h"
 #include <stack>
+#include "imgui/imgui.h"
+
 class KeyHandler
 {
 
@@ -13,6 +15,7 @@ public:
 		std::queue<std::shared_ptr<IRotation>>& rotates,
 		std::stack<std::shared_ptr<IRotation>>& rotatesHistory);
 	void handleKey();
+	ImVec2 vecMouse5;
 private:
 	std::map<Rotation1, std::shared_ptr<IRotation>> allRotations;
 	void pushToEmptyQueue(Rotation1);
@@ -25,4 +28,5 @@ private:
 	std::shared_ptr<IFinder>& m_realFinder;
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_rotatesHistory;
+	
 };
