@@ -14,7 +14,8 @@ struct OnlineParams
 	float rotateXstatic{ 0.4f };
 	float rotateYstatic{ -0.6f };
 
-	glm::vec3 fTriangle{};
-	glm::vec3 sTriangle{};
-	glm::vec3 tTriangle{};
+	glm::vec3 bottomLeftVert{};
+	glm::vec3 bottomRightVert{};
+	glm::vec3 topRightVert{};
+	glm::vec3 topLeftVert{};
 };

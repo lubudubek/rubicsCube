@@ -1,0 +1,189 @@
+﻿  FinalPermutationSolver.cpp
+  SecondLayerEdgeFinalSolver.cpp
+  SecondLayerEdgeSolver.cpp
+  YellowCornerPermutationSolver.cpp
+E:\programming\RubicCube\podejscieDrugie\Test\Finders\YellowCornerPermutationSolver.cpp(101): warning C4305: "argument": obcięcie z "double" do "float"
+E:\programming\RubicCube\podejscieDrugie\Test\Finders\YellowCornerPermutationSolver.cpp(156): warning C4244: "return": konwersja z "__int64" do "int", możliwa utrata danych
+  YellowCornerSetSolver.cpp
+E:\programming\RubicCube\podejscieDrugie\Test\Finders\YellowCornerSetSolver.cpp(54): warning C4305: "argument": obcięcie z "double" do "float"
+E:\programming\RubicCube\podejscieDrugie\Test\Finders\YellowCornerSetSolver.cpp(87): warning C4244: "return": konwersja z "__int64" do "int", możliwa utrata danych
+  YellowCrossPermutationSolver.cpp
+  PositionTypes.cpp
+  CubeRotation.cpp
+E:\programming\RubicCube\podejscieDrugie\Test\Rotators\CubeRotation.cpp(15): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+  EmptySolver.cpp
+  glProxy.cpp
+E:\programming\RubicCube\podejscieDrugie\glProxy.cpp(1): warning C4005: "GLEW_STATIC": ponowna definicja makra
+  E:\programming\RubicCube\podejscieDrugie\glProxy.cpp: note: zobacz poprzednią definicję „GLEW_STATIC”
+  imGuiProxy.cpp
+  IndexBuffer.cpp
+  main.cpp
+  LastSolver.cpp
+  renderer.cpp
+  glm.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw_gl3.cpp
+  Generowanie kodu...
+  Trwa kompilowanie...
+  shader.cpp
+  stb_image.cpp
+  AvaliableRotatorsFactory.cpp
+  CubeTest.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1547): warning C4244: "argument": konwersja z "_Ty" do "unsigned int", możliwa utrata danych
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1601): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::_Ref_count_obj<_Ty>::_Ref_count_obj<float*,unsigned __int64>(float *&&,unsigned __int64 &&)” jest kompilowane
+          with
+          [
+              _Ty=VertexBuffer
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1602): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::_Ref_count_obj<_Ty>::_Ref_count_obj<float*,unsigned __int64>(float *&&,unsigned __int64 &&)” jest kompilowane
+          with
+          [
+              _Ty=VertexBuffer
+          ]
+  E:\programming\RubicCube\podejscieDrugie\Test\CubeTest.cpp(29): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::shared_ptr<VertexBuffer> std::make_shared<VertexBuffer,float*,unsigned __int64>(float *&&,unsigned __int64 &&)” jest kompilowane
+  Cubic.cpp
+  CubicAnimateSupervisor.cpp
+  CubicTransformations.cpp
+  RealRotationFinder.cpp
+  WhiteCorners.cpp
+  IndeciesBuilder.cpp
+  KeyHandler.cpp
+  kostka.cpp
+  myTexturePtrs.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1547): warning C4244: "argument": konwersja z "_Ty" do "unsigned int", możliwa utrata danych
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1601): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::_Ref_count_obj<_Ty>::_Ref_count_obj<float*&,unsigned __int64>(float *&,unsigned __int64 &&)” jest kompilowane
+          with
+          [
+              _Ty=VertexBuffer
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1602): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::_Ref_count_obj<_Ty>::_Ref_count_obj<float*&,unsigned __int64>(float *&,unsigned __int64 &&)” jest kompilowane
+          with
+          [
+              _Ty=VertexBuffer
+          ]
+  E:\programming\RubicCube\podejscieDrugie\Test\myTexturePtrs.cpp(21): note: zobacz odwołanie do funkcji szablon; wystąpienie „std::shared_ptr<VertexBuffer> std::make_shared<VertexBuffer,float*&,unsigned __int64>(float *&,unsigned __int64 &&)” jest kompilowane
+  myTextureTest.cpp
+  PointersBuilder.cpp
+  PositionSwitch.cpp
+  RotationFinder.cpp
+  NoRotation.cpp
+  Rotation.cpp
+E:\programming\RubicCube\podejscieDrugie\Test\Rotators\Rotation.cpp(14): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+  Test.hpp
+  Generowanie kodu...
+  Trwa kompilowanie...
+  TestClearColor.cpp
+  Texture.cpp
+  VertexArray.cpp
+E:\programming\RubicCube\podejscieDrugie\VertexArray.cpp(25): warning C4312: "typ rzutowania": konwersja z "unsigned int" na "const void *" jest większej wielkości
+  VertexBuffer.cpp
+  WhiteGreenEdgeSolver.cpp
+  SolutionsFactory.cpp
+  YellowCrossSolver.cpp
+  Generowanie kodu...
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glewInit przywołany w funkcji "public: struct GLFWwindow * __cdecl GlProxy::initialize(void)" (?initialize@GlProxy@@QEAAPEAUGLFWwindow@@XZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwInit przywołany w funkcji "public: __cdecl GlProxy::GlProxy(void)" (??0GlProxy@@QEAA@XZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwTerminate przywołany w funkcji "public: __cdecl GlProxy::GlProxy(void)" (??0GlProxy@@QEAA@XZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwCreateWindow przywołany w funkcji "public: __cdecl GlProxy::GlProxy(void)" (??0GlProxy@@QEAA@XZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwWindowShouldClose przywołany w funkcji "public: bool __cdecl GlProxy::isWindowOpen(void)" (?isWindowOpen@GlProxy@@QEAA_NXZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwPollEvents przywołany w funkcji "public: void __cdecl GlProxy::updateWindow(void)" (?updateWindow@GlProxy@@QEAAXXZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetKeyCallback przywołany w funkcji "public: struct GLFWwindow * __cdecl GlProxy::initialize(void)" (?initialize@GlProxy@@QEAAPEAUGLFWwindow@@XZ)
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny glfwSetKeyCallback
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwMakeContextCurrent przywołany w funkcji "public: struct GLFWwindow * __cdecl GlProxy::initialize(void)" (?initialize@GlProxy@@QEAAPEAUGLFWwindow@@XZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSwapBuffers przywołany w funkcji "public: void __cdecl GlProxy::updateWindow(void)" (?updateWindow@GlProxy@@QEAAXXZ)
+glProxy.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSwapInterval przywołany w funkcji "public: struct GLFWwindow * __cdecl GlProxy::initialize(void)" (?initialize@GlProxy@@QEAAPEAUGLFWwindow@@XZ)
+glProxy.obj : error LNK2001: nierozpoznany symbol zewnętrzny glewExperimental
+IndexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindBuffer
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindBuffer
+VertexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindBuffer
+IndexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBufferData
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBufferData
+VertexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBufferData
+IndexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteBuffers
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteBuffers
+VertexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteBuffers
+IndexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGenBuffers
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGenBuffers
+VertexBuffer.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGenBuffers
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetWindowSize przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetFramebufferSize przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetWindowAttrib przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetInputMode przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetInputMode przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetMouseButton przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetCursorPos przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetCursorPos przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwCreateStandardCursor przywołany w funkcji "bool __cdecl ImGui_ImplGlfwGL3_Init(struct GLFWwindow *,bool,char const *)" (?ImGui_ImplGlfwGL3_Init@@YA_NPEAUGLFWwindow@@_NPEBD@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwDestroyCursor przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_Shutdown(void)" (?ImGui_ImplGlfwGL3_Shutdown@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetCursor przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetCharCallback przywołany w funkcji "void __cdecl ImGui_ImplGlfw_InstallCallbacks(struct GLFWwindow *)" (?ImGui_ImplGlfw_InstallCallbacks@@YAXPEAUGLFWwindow@@@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetMouseButtonCallback przywołany w funkcji "void __cdecl ImGui_ImplGlfw_InstallCallbacks(struct GLFWwindow *)" (?ImGui_ImplGlfw_InstallCallbacks@@YAXPEAUGLFWwindow@@@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetScrollCallback przywołany w funkcji "void __cdecl ImGui_ImplGlfw_InstallCallbacks(struct GLFWwindow *)" (?ImGui_ImplGlfw_InstallCallbacks@@YAXPEAUGLFWwindow@@@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetJoystickAxes przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetJoystickButtons przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwSetClipboardString przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_SetClipboardText(void *,char const *)" (?ImGui_ImplGlfwGL3_SetClipboardText@@YAXPEAXPEBD@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetClipboardString przywołany w funkcji "char const * __cdecl ImGui_ImplGlfwGL3_GetClipboardText(void *)" (?ImGui_ImplGlfwGL3_GetClipboardText@@YAPEBDPEAX@Z)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetTime przywołany w funkcji "void __cdecl ImGui_ImplGlfwGL3_NewFrame(void)" (?ImGui_ImplGlfwGL3_NewFrame@@YAXXZ)
+imgui_impl_glfw_gl3.obj : error LNK2019: nierozpoznany zewnętrzny symbol glfwGetWin32Window przywołany w funkcji "bool __cdecl ImGui_ImplGlfwGL3_Init(struct GLFWwindow *,bool,char const *)" (?ImGui_ImplGlfwGL3_Init@@YA_NPEAUGLFWwindow@@_NPEBD@Z)
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewActiveTexture
+Texture.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewActiveTexture
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBlendEquation
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBlendFuncSeparate
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewAttachShader
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewAttachShader
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBlendEquationSeparate
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCompileShader
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCompileShader
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCreateProgram
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCreateProgram
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCreateShader
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewCreateShader
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteProgram
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteProgram
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteShader
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteShader
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDetachShader
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewEnableVertexAttribArray
+VertexArray.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewEnableVertexAttribArray
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGetAttribLocation
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGetUniformLocation
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGetUniformLocation
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewLinkProgram
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewLinkProgram
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewShaderSource
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewShaderSource
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniform1i
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniform1i
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniformMatrix4fv
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniformMatrix4fv
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUseProgram
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUseProgram
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewVertexAttribPointer
+VertexArray.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewVertexAttribPointer
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindSampler
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindVertexArray
+VertexArray.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewBindVertexArray
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteVertexArrays
+VertexArray.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewDeleteVertexArrays
+imgui_impl_glfw_gl3.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGenVertexArrays
+VertexArray.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGenVertexArrays
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGetShaderInfoLog
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewGetShaderiv
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniform1f
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewUniform4f
+shader.obj : error LNK2001: nierozpoznany symbol zewnętrzny __glewValidateProgram
+E:\programming\newRubic\GLFW\lib-vc2019\glfw3.lib : warning LNK4272: wystąpił konflikt typu maszyny biblioteki „x86” z typem maszyny docelowej „x64”
+E:\programming\newRubic\GLFW\lib-vc2019\glfw3dll.lib : warning LNK4272: wystąpił konflikt typu maszyny biblioteki „x86” z typem maszyny docelowej „x64”
+E:\programming\newRubic\GLEW\lib\Release\Win32\glew32s.lib : warning LNK4272: wystąpił konflikt typu maszyny biblioteki „x86” z typem maszyny docelowej „x64”
+E:\programming\newRubic\GLEW\lib\Release\Win32\glew32.lib : warning LNK4272: wystąpił konflikt typu maszyny biblioteki „x86” z typem maszyny docelowej „x64”
+E:\programming\RubicCube\x64\Debug\podejscieDrugie.exe : fatal error LNK1120: liczba nierozpoznanych elementów zewnętrznych: 64

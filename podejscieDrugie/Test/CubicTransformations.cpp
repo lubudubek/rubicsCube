@@ -115,7 +115,7 @@ void CubicTransformations::moveLast()
 
 glm::mat4 CubicTransformations::prepareCommonTransformation()
 {
-	glm::vec3 m_translationB(0.0f, 0.0f, m_onlineParams.transformZ);
+	glm::vec3 m_translationB(-1.5f, 0.0f, m_onlineParams.transformZ);
 
 	glm::mat4 model1 = glm::translate(glm::mat4(1.0f), m_translationB);
 	glm::mat4 proj = glm::perspective(m_onlineParams.fovy, m_onlineParams.aspect, m_onlineParams.near, m_onlineParams.far);
@@ -127,7 +127,9 @@ glm::mat4 CubicTransformations::prepareCommonTransformation()
 	glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
 	glm::mat4 rotationx = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 rotationy = glm::rotate(glm::mat4(1.0f), m_onlineParams.rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-	return transX * proj * model1 * rotationx* rotationy;// *scale;
+	return //transX * 
+		//proj * 
+		model1 * rotationx* rotationy;// *scale;
 	//glm::gtx::
 
 }

@@ -16,9 +16,10 @@ public:
 		std::stack<std::shared_ptr<IRotation>>& rotatesHistory);
 	void handleKey();
 	ImVec2 vecMouse5;
+	void pushToEmptyQueue(Rotation1);
 private:
 	std::map<Rotation1, std::shared_ptr<IRotation>> allRotations;
-	void pushToEmptyQueue(Rotation1);
+	//void pushToEmptyQueue(Rotation1);
 	void pushToEmptyQueue(std::vector<Rotation1> rotation);
 
 	void makeRandomMoves();

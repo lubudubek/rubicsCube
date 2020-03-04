@@ -17,11 +17,13 @@
 
 namespace test
 {
+	struct Diff { float x, y; };
+
 	class CubeTest : public Test
 	{
 	public:
 		CubeTest();
-		~CubeTest();
+		virtual ~CubeTest();
 
 		virtual void OnUpdate(float deltaTime);
 		virtual void OnRenderer();
@@ -46,5 +48,11 @@ namespace test
 		std::unique_ptr<CubicAnimateSupervisor> m_cubicSupervisor;
 		
 		OnlineParams m_onlineParams{};
+
+		
+		Diff diff;
+		Cubic* chosenOne = nullptr;
+		Position chosenSurface;
+		bool isClicked;
 	};
 }

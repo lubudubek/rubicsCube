@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MouseRotationMap.cpp" />
     <ClCompile Include="Test\Finders\FinalPermutationSolver.cpp" />
     <ClCompile Include="Test\Finders\SecondLayerEdgeFinalSolver.cpp" />
     <ClCompile Include="Test\Finders\SecondLayerEdgeSolver.cpp" />
@@ -319,6 +320,7 @@
     <None Include="res\shaders\Cube.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MouseRotationMap.h" />
     <ClInclude Include="Test\Finders\FinalPermutationSolver.h" />
     <ClInclude Include="Test\Finders\SecondLayerEdgeFinalSolver.hpp" />
     <ClInclude Include="Test\Finders\SecondLayerEdgeSolver.hpp" />

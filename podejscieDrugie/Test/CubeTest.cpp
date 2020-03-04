@@ -10,7 +10,8 @@
 #include "IndeciesBuilder.hpp"
 #include <glm/gtx/intersect.hpp>
 //#include "Finders/BlankRotattionFinder.h"
-
+#include "MouseRotationMap.h"
+#include <array>
 
 //#define _USE_MATH_DEFINES
 
@@ -57,56 +58,23 @@ namespace test
 
 	void CubeTest::OnRenderer()
 	{
-		//glm::vec3 v0(1, 4, 1);
-		//glm::vec3 v1(-1, 4, 1);
-		//glm::vec3 v2(0, 4, -1);
-		//glm::vec3 origin(0, 0, 0);
-		//glm::vec3 direction(0, 1, 0);
-
-
 		Renderer render;
 		render.Clear();
 		{
-			m_keyHandler.handleKey();
+			/*m_keyHandler.handleKey();*/
 		   
 			m_cubicSupervisor->ping();
 			cubicMvps.handleCamera();
 			m_shader->Bind();
 
-			
-			for (auto& cubic : cubicMvps.getCubics())
-			{
-				std::vector<Position> temp{ Position::FRONT, Position::LEFT, Position::TOP };
-				if (cubic.getInitialPosition() == temp)
-				{
-
-
-					glm::vec4 tr1coord = { -0.5f, -0.5f, 0.5f, 1.0f};
-					glm::vec4 tr2coord = { 0.5f, -0.5f, 0.5f, 1.0f };
-					glm::vec4 tr3coord = { 0.5f, 0.5f, 0.5f, 1.0f };
-					auto transform = cubic.getTransformation();
-					tr1coord = tr1coord * transform;
-					tr2coord = tr2coord * transform;
-					tr3coord = tr3coord * transform;
-					m_onlineParams.fTriangle = tr1coord;
-					m_onlineParams.sTriangle = tr2coord;
-					m_onlineParams.tTriangle = tr3coord;
-
-
-
-
-					cubic.setOpacity(1.0f);
-				}
-				else
-				{
-					cubic.setOpacity(0.2f);
-				}
-			}
 			for (auto& cubic : cubicMvps.getCubics())
 			{
 				if(cubic.getOpacity() > 0.9f)
 				{		
-					m_shader->SetUniformMat4f("u_MVP", cubic.getTransformation());
+					glm::mat4 proj = glm::perspective(m_onlineParams.fovy, m_onlineParams.aspect, m_onlineParams.near, m_onlineParams.far);
+					glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
+
+					m_shader->SetUniformMat4f("u_MVP", proj * cubic.getTransformation());
 					m_shader->SetUniform1f("opacity", cubic.getOpacity());
 					render.Draw(*m_va, *m_ib, *m_shader);
 				}
@@ -115,11 +83,13 @@ namespace test
 			{
 				if (cubic.getOpacity() < 0.9f)
 				{
-					m_shader->SetUniformMat4f("u_MVP", cubic.getTransformation());
+					glm::mat4 proj = glm::perspective(m_onlineParams.fovy, m_onlineParams.aspect, m_onlineParams.near, m_onlineParams.far);
+					glm::mat4 transX = glm::translate(glm::mat4(1.0f), glm::vec3(-0.3f, 0.0f, 0.0f));
+
+					m_shader->SetUniformMat4f("u_MVP", proj * cubic.getTransformation());
 					m_shader->SetUniform1f("opacity", cubic.getOpacity());
 					render.Draw(*m_va, *m_ib, *m_shader);
 				}
-				cubic.setOpacity(1.0f);
 			}
 
 		}
@@ -136,7 +106,7 @@ namespace test
 						glm::vec3 cameraUpVector) {
 		// these positions must be in range [-1, 1] (!!!), not [0, width] and [0, height]
 		float mouseX = mousePosX / (windowW * 0.5f) - 1.0f;
-		float mouseY = mousePosY / (windowH * 0.5f) - 1.0f;
+		float mouseY = 1.0f - mousePosY / (windowH * 0.5f);
 
 		glm::mat4 proj = glm::perspective(fov, aspect, near, far);
 		glm::mat4 view = glm::lookAt(glm::vec3(0.0f), cameraDirection, cameraUpVector);
@@ -149,10 +119,74 @@ namespace test
 
 		return dir;
 	}
+	std::array<glm::vec3, 4> convertToVerts(Position surface)
+	{
+		switch(surface){
+		case Position::FRONT:
+			return{
+				glm::vec3{ -0.5f, -0.5f, 0.5f },
+				glm::vec3{  0.5f, -0.5f, 0.5f },
+				glm::vec3{  0.5f,  0.5f, 0.5f },
+				glm::vec3{ -0.5f,  0.5f, 0.5f } };
+		case Position::BACK:
+			return{
+				glm::vec3{ -0.5f, -0.5f, -0.5f },
+				glm::vec3{  0.5f, -0.5f, -0.5f },
+				glm::vec3{  0.5f,  0.5f, -0.5f },
+				glm::vec3{ -0.5f,  0.5f, -0.5f } };
+		case Position::LEFT:
+			return{
+				glm::vec3{ -0.5f, -0.5f, -0.5f },
+				glm::vec3{ -0.5f,  0.5f, -0.5f },
+				glm::vec3{ -0.5f,  0.5f,  0.5f },
+				glm::vec3{ -0.5f, -0.5f,  0.5f } };
+		case Position::RIGHT:
+			return{
+				glm::vec3{ 0.5f, -0.5f, -0.5f },
+				glm::vec3{ 0.5f,  0.5f, -0.5f },
+				glm::vec3{ 0.5f,  0.5f,  0.5f },
+				glm::vec3{ 0.5f, -0.5f,  0.5f } };
+		case Position::BOTTOM:
+			return{
+				glm::vec3{ -0.5f, -0.5f, -0.5f },
+				glm::vec3{  0.5f, -0.5f, -0.5f },
+				glm::vec3{  0.5f, -0.5f,  0.5f },
+				glm::vec3{ -0.5f, -0.5f,  0.5f } };
+		case Position::TOP:
+			return{
+				glm::vec3{ -0.5f, 0.5f, -0.5f },
+				glm::vec3{  0.5f, 0.5f, -0.5f },
+				glm::vec3{  0.5f, 0.5f,  0.5f },
+				glm::vec3{ -0.5f, 0.5f,  0.5f } };
+		default:
+			return{
+				glm::vec3{ -0.00001f, -0.00001f, 0.00001f },
+				glm::vec3{  0.00001f, -0.00001f, 0.00001f },
+				glm::vec3{  0.00001f,  0.00001f, 0.00001f },
+				glm::vec3{ -0.00001f,  0.00001f, 0.00001f } };
+		}
+
+		//return result;
+	}
+
+
+
+	
+
+	//std::vector<Position> positions;
+	//MouseRotationKey mousRotKey{ { Position::FRONT, Position::LEFT,  Position::TOP    }, Position::FRONT, Direction2d::UP };
+
+
+	bool isDragStrongEnough(Diff diff)
+	{
+		return (abs(diff.x * diff.y) > 40);
+	}
+
 	void CubeTest::OnImGuiRenderer()
 	{
-			ImGui::SliderFloat("Fovy", &m_onlineParams.fovy, -3.14f, 3.14f);// 6.0f, 9.0f
-			ImGui::SliderFloat("Fovy 1", &m_onlineParams.near, -50.0f, 50.0f);// 1.5f, 2.5f
+		m_keyHandler.handleKey();
+			ImGui::SliderFloat("Fovy", &m_onlineParams.fovy, -3.14f, 3.14f);
+			ImGui::SliderFloat("Fovy 1", &m_onlineParams.near, -50.0f, 50.0f);
 			ImGui::SliderFloat("Fovy 2", &m_onlineParams.far, -50.0f, 50.0f);
 
 			ImGui::SliderFloat("Translate Z", &m_onlineParams.transformZ, -40.0f, 40.0f);
@@ -161,6 +195,10 @@ namespace test
 			ImGui::SliderFloat("Aspect", &m_onlineParams.aspect, -2.0f, 2.0f);
 
 			auto vecMouse = ImGui::GetMouseDragDelta(0, 1.0);
+			diff.x = diff.x + vecMouse.x;
+			diff.y = diff.y + vecMouse.y;
+
+			auto posMouse = ImGui::GetMousePos();
 			
 			if (ImGui::IsKeyPressed(68))
 			{
@@ -169,22 +207,25 @@ namespace test
 				m_onlineParams.aspect *= -1;
 				m_onlineParams.rotateX *= -1;
 				std::swap(m_onlineParams.near, m_onlineParams.far);
-				//m_onlineParams.transformZ = 5;
 			}
-			if (ImGui::IsAnyMouseDown())
+			if (ImGui::IsMouseDown(0) and ImGui::IsMouseDown(1))
 			{
 				m_onlineParams.rotateY = (vecMouse.x / 100) + m_onlineParams.rotateYstatic;
 				m_onlineParams.rotateX = (vecMouse.y / 100) + m_onlineParams.rotateXstatic;
-				std::cout << std::endl << "Mouse Position: x(" << ImGui::GetMousePos().x << "), y(" << ImGui::GetMousePos().y << ")" <<std::endl;
-
+				std::cout << std::endl << "Mouse Position: x(" << ImGui::GetMousePos().x << "), y(" << ImGui::GetMousePos().y << ")" << std::endl;
+			}
+			else if (ImGui::IsMouseDown(0) and not ImGui::IsMouseDown(1) and not isClicked)
+			{
+				isClicked = true;
 				glm::vec2 BaryPosition(0.0f, 0.0f);
-				float Distance = 0;
+				float distance = -40;
+				float minDistance = -40;
 				auto cameraDirection = glm::vec3(0.0f, 0.0f, 1.0f);
 				auto cameraUpVector = glm::vec3(0.0f, 1.0f, 0.0f);
 				auto orig = glm::vec3(0.0f, 0.0f, 0.0f);
 				auto dir = CreateRay(
-					m_onlineParams.rotateX,
-					m_onlineParams.rotateY,
+					posMouse.x,
+					posMouse.y,
 					480.0f,
 					840.0f,
 					m_onlineParams.fovy,
@@ -194,36 +235,77 @@ namespace test
 					cameraDirection,
 					cameraUpVector);
 
-				bool const Result = glm::intersectRayTriangle(orig, dir, m_onlineParams.fTriangle, m_onlineParams.sTriangle, m_onlineParams.tTriangle, BaryPosition, Distance);
-				std::cout << "Result:" << Result << std::endl;
-				std::cout << "Verts: (" << m_onlineParams.fTriangle.x << ", " << m_onlineParams.fTriangle.y << ", " << m_onlineParams.fTriangle.z<< ") " <<
-					 " (" << m_onlineParams.sTriangle.x << ", " << m_onlineParams.sTriangle.y << ", " << m_onlineParams.sTriangle.z << ")" << 
-			         " (" << m_onlineParams.tTriangle.x << ", " << m_onlineParams.tTriangle.y << ", " << m_onlineParams.tTriangle.z << ")" << std::endl;
+				
+				
+				for (auto& cubic : cubicMvps.getCubics())
+				{
+					auto transformation = cubic.getTransformation();
+					for (auto& surface : cubic.getInitialPosition())
+					{
+						
+						std::array<glm::vec3, 4> verts = convertToVerts(surface);
+						std::transform(verts.begin(), verts.end(), verts.begin(),
+							[&transformation](auto & vert) { return transformation * glm::vec4{ vert, 1.0f }; });
 
+						bool const Result = glm::intersectRayTriangle(orig, dir, verts[0], verts[1], verts[2], BaryPosition, distance)
+							|| glm::intersectRayTriangle(orig, dir, verts[0], verts[2], verts[3], BaryPosition, distance);
+
+						if (Result == true and distance > minDistance)
+						{
+							minDistance = distance;
+							chosenSurface = *cubic.getPositionOfInitial(surface);
+							chosenOne = &cubic;
+						}
+					}
+					cubic.setOpacity(0.3f);
+				}
+
+				if (not chosenOne)
+				{
+					std::cout << "not found cube" << std::endl;
+				}
+				else
+				{
+					std::cout << "chosen surface: " << chosenSurface << std::endl;
+					chosenOne->setOpacity(1.0f);
+				}
 			}
 			if (ImGui::IsMouseReleased(0)) {
+				Direction2d chosenDirection;
+				if (chosenOne && isDragStrongEnough(diff)) {
+					if (abs(diff.x) > abs(diff.y))
+					{
+						chosenDirection = (diff.x > 0) ? Direction2d::RIGHT : Direction2d::LEFT;
+						std::cout << "Move " << chosenSurface << ((diff.x > 0) ? ", RIGHT" : " LEFT") << " by " << abs(diff.x) << std::endl;
+					}
+					else
+					{
+						chosenDirection = (diff.y) > 0 ? Direction2d::DOWN : Direction2d::UP;
+						std::cout << "Move " << chosenSurface << ((diff.y > 0) ? ", DOWN" : " UP") << " by " << abs(diff.y) << std::endl;
+					}
+				
+					MouseRotationKey selected{ chosenOne->getPosition(), chosenSurface,  chosenDirection };
+					std::cout << "Selected item: ";
+					for (int i = 0; i < selected.positions.size(); ++i)
+					{
+						std::cout << selected.positions[i] << ", ";
+					}
+					std::cout << "chosen surface: " << selected.surface << ", "<< selected.direction << std::endl;
+					m_keyHandler.pushToEmptyQueue(mouseRotationsMap.at(selected));
+
+				
+				}
 				m_onlineParams.rotateYstatic = m_onlineParams.rotateY;
 				m_onlineParams.rotateXstatic = m_onlineParams.rotateX;
+				chosenOne = nullptr;
+				diff.x = 0;
+				diff.y = 0;
+
+				//std::cout << "CHOSEN DIRECTION " << chosenOne->getPosition() << ", " << chosenSurface << ", " << bool(diff.x > 0) << std::endl;
+
+
+				isClicked = false;
 			}
-
-
-
-			//	m_onlineParams.fTriangle,
-			//	m_onlineParams.sTriangle
-			//	m_onlineParams.tTriangle
-			//	vec<3, T, Q> const& orig, vec<3, T, Q> const& dir,
-			//	vec<3, T, Q> const& v0, vec<3, T, Q> const& v1, vec<3, T, Q> const& v2,
-			//	vec<2, T, Q> & baryPosition, T & distance);
-
-
-
-			//	auto pos = ImGui::GetMousePos();
-
-			//	std::cout << std::endl << "MOUSE CLICKED pos: x(" << pos.x << ") y(" << pos.y << ")";
-			//	//std::cout << std::endl << "MOUSE DRAGGED: x(" << vecMouse5.x << ") y(" << vecMouse5.y << ")";
-			//}
-			//auto vecMouse = ImGui::GetMouseDragDelta(0, 1.0);
-			//m_onlineParams.rotateX = vecMouse.x / 100;
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
