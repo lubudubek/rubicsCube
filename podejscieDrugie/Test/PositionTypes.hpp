@@ -104,6 +104,10 @@ inline std::ostream& operator<< (std::ostream& stream, const Rotation1& rotation
 		case Rotation1::TOP_ROTATE_LEFT: temp = "TOP_ROTATE_LEFT"; break;
 		case Rotation1::CENTER_Y_ROTATE_RIGHT: temp = "CENTER_Y_ROTATE_RIGHT"; break;
 		case Rotation1::CENTER_Y_ROTATE_LEFT: temp = "CENTER_Y_ROTATE_LEFT"; break;
+
+		case Rotation1::Y_ROTATE_RIGHT: temp = "Y_ROTATE_RIGHT"; break;
+		case Rotation1::Y_ROTATE_LEFT: temp = "Y_ROTATE_LEFT"; break;
+		default: temp = (int)rotation;
 	}
 	stream << temp;
 	return stream;

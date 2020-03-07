@@ -23,6 +23,7 @@ private:
 	int countCubeOnRightPosition();
 	std::vector<Position> getPositionOfCubicInRightPlace();
 	bool  rightFrontShouldBeRightBack();
+	bool comeBackToDefaultCubePosition();
 	
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_historyRrotates;

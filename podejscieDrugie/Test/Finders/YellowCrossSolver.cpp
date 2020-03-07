@@ -66,6 +66,9 @@ std::vector<Position> YellowCrossSolver::findYellowTopPositions()
 
 void YellowCrossSolver::findRotations()
 {
+	if (comeBackToDefaultCubePosition())
+		return;
+
 	std::vector<Position> yelowPos = findYellowTopPositions();
 	for (auto& rotation : m_rotationsMap.at(yelowPos))
 	{
@@ -73,6 +76,39 @@ void YellowCrossSolver::findRotations()
 		m_historyRrotates.push(allRotations.at(opositeRotationsMap.at(rotation)));
 	}
 	m_solverContainer.setNextState();
+}
+namespace {
+	std::map<Position, std::vector<Rotation1>> backFrontToDefault =
+	{
+		{ {Position::FRONT }, // ok 
+			{} },
+		{ {Position::LEFT }, // ok
+			{Rotation1::Y_ROTATE_RIGHT} },
+		{ {Position::BACK }, // ok
+			{Rotation1::Y_ROTATE_LEFT, Rotation1::Y_ROTATE_LEFT} },
+		{ {Position::RIGHT }, // ok
+			{Rotation1::Y_ROTATE_LEFT} }
+	};
+}
+bool YellowCrossSolver::comeBackToDefaultCubePosition()
+{
+	auto cubics = m_cubicMvps.getCubics();
+	auto cubicInFront = std::find_if(cubics.begin(), cubics.end(), [&](auto cube)
+	{
+		return cube.getPosition() == std::vector{ Position::FRONT };
+	});
+
+	if (cubicInFront->getInitialPositionOf(Position::FRONT) == Position::FRONT)
+		return false;
+	//std::cout << "initial position in front: " << *cubicInFront->getInitialPositionOf(Position::FRONT) << ", from map: (size: " << backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)).size() << ") ";
+	//for (int i = 0; i < backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)).size(); i++)
+	//	std::cout << backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT))[0] << std::endl;
+	for (auto& rotation : backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)))
+	{
+		m_rotates.push(allRotations.at(rotation));
+		m_historyRrotates.push(allRotations.at(opositeRotationsMap.at(rotation)));
+	}
+	return true;
 }
 
 

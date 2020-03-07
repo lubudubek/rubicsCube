@@ -33,4 +33,5 @@ namespace test
 	};
 
 	extern std::map<MouseRotationKey, Rotation1> mouseRotationsMap;
+	extern std::map<MouseRotationKey, Rotation1> mouseCtrlRotationsMap;
 }

@@ -20,6 +20,7 @@ public:
 
 	~SecondLayerEdgeFinalSolver();
 private:
+	void comeBackToDefaultCubePosition();
 	bool wholeMiddleLayerSolved(std::vector<Cubic>& cubics);
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_historyRrotates;

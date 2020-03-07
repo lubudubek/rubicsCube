@@ -29,6 +29,7 @@ RealRotationFinder::RealRotationFinder(std::queue<std::shared_ptr<IRotation>>& p
 	m_solvers.emplace_back(solutionFactory.createSecondLayerEdgeFinalSolution());
 	m_solvers.emplace_back(solutionFactory.createYellowCrossSolution());
 	m_solvers.emplace_back(solutionFactory.createYellowCrossPermutationSolution());
+	m_solvers.emplace_back(solutionFactory.createYellowCrossPermutationSolution()); //todo remove it
 	m_solvers.emplace_back(solutionFactory.createYellowCornersSetSolution());
 	m_solvers.emplace_back(solutionFactory.createYellowCornersPermutationSolution());
 	m_solvers.emplace_back(solutionFactory.createFinalPermutationSolution());

@@ -59,28 +59,72 @@ bool SecondLayerEdgeFinalSolver::wholeMiddleLayerSolved(std::vector<Cubic>& cubi
 void SecondLayerEdgeFinalSolver::findRotations()
 {
 	auto cubics = m_cubicMvps.getCubics();
+	auto cubicOnRight = std::find_if(cubics.begin(), cubics.end(), [&](auto cube)
+	{
+		return cube.getPosition() == std::vector{Position::RIGHT};
+	});
+
+
 	std::vector<Position> positionsToSearch = { Position::FRONT, Position::TOP };
 	auto cubic = std::find_if(cubics.begin(), cubics.end(), [&](auto cube)
 	{
 		std::cout << cube.getPosition();
 		
 		return std::is_permutation(cube.getPosition().begin(), cube.getPosition().end(), positionsToSearch.begin(), positionsToSearch.end());
-			});
+	});
 
-	for (auto& rotation : topFixer.at({ cubic->getInitialPosition()[std::distance(
-		cubic->getPosition().begin(), std::find(cubic->getPosition().begin(), cubic->getPosition().end(), Position::TOP))] }))
+	auto initAtTopInFront = cubic->getInitialPositionOf( Position::TOP);
+	auto chosenDir = initAtTopInFront == cubicOnRight->getInitialPositionOf(Position::RIGHT) ? Position::RIGHT : Position::LEFT;
+	for (auto& rotation : topFixer.at({ chosenDir }))//*cubic->getInitialPositionOf(Position::TOP) }))
 	{
 		m_rotates.push(allRotations.at(rotation));
 		m_historyRrotates.push(allRotations.at(opositeRotationsMap.at(rotation)));
 	}
 
+	comeBackToDefaultCubePosition();
+
 	if (wholeMiddleLayerSolved(cubics))
 	{
+		std::cout << std::endl << "MIDDLE LAYER SOLVED";
+		//m_solverContainer.setInitialState();
 		m_solverContainer.setNextState();
 	}
 	else
 	{
+		std::cout << std::endl << "MIDDLE LAYER NOT SOLVED YET";
+		//m_solverContainer.setInitialState();
 		m_solverContainer.setPreviousState();
+	}
+	
+}
+
+std::map<Position, std::vector<Rotation1>> backFrontToDefault =
+{
+	{ {Position::FRONT }, // ok 
+		{} },
+	{ {Position::LEFT }, // ok
+		{Rotation1::Y_ROTATE_RIGHT} },
+	{ {Position::BACK }, // ok
+		{Rotation1::Y_ROTATE_LEFT, Rotation1::Y_ROTATE_LEFT} },
+	{ {Position::RIGHT }, // ok
+		{Rotation1::Y_ROTATE_LEFT} }
+};
+
+void SecondLayerEdgeFinalSolver::comeBackToDefaultCubePosition()
+{
+	auto cubics = m_cubicMvps.getCubics();
+	auto cubicInFront = std::find_if(cubics.begin(), cubics.end(), [&](auto cube)
+	{
+		return cube.getPosition() == std::vector{ Position::FRONT };
+	});
+
+	std::cout << "initial position in front: " << *cubicInFront->getInitialPositionOf(Position::FRONT) << ", from map: (size: " << backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)).size() << ") ";
+	for(int i = 0; i < backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)).size(); i++)
+		std::cout << backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT))[0] << std::endl;
+	for (auto& rotation : backFrontToDefault.at(*cubicInFront->getInitialPositionOf(Position::FRONT)))
+	{
+		m_rotates.push(allRotations.at(rotation));
+		m_historyRrotates.push(allRotations.at(opositeRotationsMap.at(rotation)));
 	}
 }
 

@@ -62,8 +62,11 @@ namespace test
 		render.Clear();
 		{
 			/*m_keyHandler.handleKey();*/
-		   
-			m_cubicSupervisor->ping();
+			if (true)//enablePing)
+			{
+				m_cubicSupervisor->ping();
+				enablePing = false;
+			}
 			cubicMvps.handleCamera();
 			m_shader->Bind();
 
@@ -185,6 +188,10 @@ namespace test
 	void CubeTest::OnImGuiRenderer()
 	{
 		m_keyHandler.handleKey();
+		if (ImGui::IsKeyPressed(80)) //p
+			enablePing = true;
+
+
 			ImGui::SliderFloat("Fovy", &m_onlineParams.fovy, -3.14f, 3.14f);
 			ImGui::SliderFloat("Fovy 1", &m_onlineParams.near, -50.0f, 50.0f);
 			ImGui::SliderFloat("Fovy 2", &m_onlineParams.far, -50.0f, 50.0f);
@@ -212,11 +219,12 @@ namespace test
 			{
 				m_onlineParams.rotateY = (vecMouse.x / 100) + m_onlineParams.rotateYstatic;
 				m_onlineParams.rotateX = (vecMouse.y / 100) + m_onlineParams.rotateXstatic;
-				std::cout << std::endl << "Mouse Position: x(" << ImGui::GetMousePos().x << "), y(" << ImGui::GetMousePos().y << ")" << std::endl;
+				//std::cout << std::endl << "Mouse Position: x(" << ImGui::GetMousePos().x << "), y(" << ImGui::GetMousePos().y << ")" << std::endl;
 			}
 			else if (ImGui::IsMouseDown(0) and not ImGui::IsMouseDown(1) and not isClicked)
 			{
 				isClicked = true;
+				ctrlClicked = ImGui::GetIO().KeyCtrl;
 				glm::vec2 BaryPosition(0.0f, 0.0f);
 				float distance = -40;
 				float minDistance = -40;
@@ -239,13 +247,21 @@ namespace test
 				
 				for (auto& cubic : cubicMvps.getCubics())
 				{
+					bool temp = cubic.getInitialPosition() == std::vector{ Position::FRONT, Position::TOP } ||
+						cubic.getInitialPosition() == std::vector{ Position::TOP, Position::FRONT };
 					auto transformation = cubic.getTransformation();
 					for (auto& surface : cubic.getInitialPosition())
 					{
-						
 						std::array<glm::vec3, 4> verts = convertToVerts(surface);
 						std::transform(verts.begin(), verts.end(), verts.begin(),
 							[&transformation](auto & vert) { return transformation * glm::vec4{ vert, 1.0f }; });
+						if (temp && surface == Position::FRONT)
+						{
+							for (auto& v : verts)
+							{
+								std::cout << "TEMP: " << v[0] << ", " << v[1] << ", " << v[2] << std::endl;
+							}
+						}
 
 						bool const Result = glm::intersectRayTriangle(orig, dir, verts[0], verts[1], verts[2], BaryPosition, distance)
 							|| glm::intersectRayTriangle(orig, dir, verts[0], verts[2], verts[3], BaryPosition, distance);
@@ -284,14 +300,15 @@ namespace test
 						std::cout << "Move " << chosenSurface << ((diff.y > 0) ? ", DOWN" : " UP") << " by " << abs(diff.y) << std::endl;
 					}
 				
-					MouseRotationKey selected{ chosenOne->getPosition(), chosenSurface,  chosenDirection };
+					MouseRotationKey selected{ chosenOne->getPosition(), chosenSurface,  chosenDirection};
 					std::cout << "Selected item: ";
 					for (int i = 0; i < selected.positions.size(); ++i)
 					{
 						std::cout << selected.positions[i] << ", ";
 					}
-					std::cout << "chosen surface: " << selected.surface << ", "<< selected.direction << std::endl;
-					m_keyHandler.pushToEmptyQueue(mouseRotationsMap.at(selected));
+					std::cout << "chosen surface: " << selected.surface << ", "<< selected.direction << ", ctrl: " << ctrlClicked << std::endl;
+
+					m_keyHandler.pushToEmptyQueue(ctrlClicked ? mouseCtrlRotationsMap.at(selected) : mouseRotationsMap.at(selected));
 
 				
 				}
@@ -305,6 +322,7 @@ namespace test
 
 
 				isClicked = false;
+				ctrlClicked = false;
 			}
 
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

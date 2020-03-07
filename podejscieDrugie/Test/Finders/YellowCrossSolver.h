@@ -28,5 +28,6 @@ private:
 	IFinder& m_solverContainer;
 	std::map<Rotation1, std::shared_ptr<IRotation>> allRotations;
 	std::map<std::vector<Position>, std::vector<Rotation1>> m_rotationsMap;
+	bool comeBackToDefaultCubePosition();
 };
 

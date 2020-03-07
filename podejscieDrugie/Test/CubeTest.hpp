@@ -54,5 +54,7 @@ namespace test
 		Cubic* chosenOne = nullptr;
 		Position chosenSurface;
 		bool isClicked;
+		bool ctrlClicked;
+		bool enablePing = false;
 	};
 }

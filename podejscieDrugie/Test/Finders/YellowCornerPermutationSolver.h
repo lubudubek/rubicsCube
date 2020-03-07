@@ -28,6 +28,7 @@ private:
 	bool isLeftAlgorithmNeeded();
 	void executeSequenceToSetOneYellowOnTop();
 	std::vector<Position> findYellowPositionsNotOnTop();
+	bool comeBackToDefaultCubePosition();
 
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_historyRrotates;

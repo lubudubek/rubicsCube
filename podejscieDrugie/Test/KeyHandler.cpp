@@ -178,11 +178,11 @@ void KeyHandler::handleKey()
 		makeRandomMoves();
 		// todo? someSequence
 	}
-	if (ImGui::IsKeyPressed(80)) // p
-	{
-		pushToEmptyQueue({ Rotation1::CENTER_X_ROTATE_UP, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::CENTER_X_ROTATE_DOWN });
-		// todo? someSequence
-	}
+	//if (ImGui::IsKeyPressed(80)) // p
+	//{
+	//	pushToEmptyQueue({ Rotation1::CENTER_X_ROTATE_UP, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::CENTER_X_ROTATE_DOWN });
+	//	// todo? someSequence
+	//}
 	if (ImGui::IsKeyPressed(76)) // l
 	{
 		pushToEmptyQueue({ Rotation1::CENTER_X_ROTATE_UP, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::TOP_ROTATE_RIGHT, Rotation1::TOP_ROTATE_RIGHT, Rotation1::CENTER_X_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::CENTER_X_ROTATE_DOWN, Rotation1::CENTER_X_ROTATE_DOWN });
@@ -216,6 +216,14 @@ void KeyHandler::handleKey()
 		pushToEmptyQueue({ Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN,
 			Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN,
 			Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT });
+	}
+	if (ImGui::IsKeyPressed(74)) // k
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_RIGHT, Rotation1::RIGHT_ROTATE_UP, Rotation1::TOP_ROTATE_LEFT, Rotation1::RIGHT_ROTATE_DOWN, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_RIGHT });
+	}
+	if (ImGui::IsKeyPressed(75)) // j
+	{
+		pushToEmptyQueue({ Rotation1::TOP_ROTATE_LEFT, Rotation1::LEFT_ROTATE_UP, Rotation1::TOP_ROTATE_RIGHT, Rotation1::LEFT_ROTATE_DOWN, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_RIGHT, Rotation1::TOP_ROTATE_LEFT, Rotation1::TOP_ROTATE_LEFT, Rotation1::FRONT_ROTATE_LEFT });
 	}
 	if (ImGui::IsKeyPressed(85)) // u
 	{

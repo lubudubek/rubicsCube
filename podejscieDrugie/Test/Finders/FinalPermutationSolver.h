@@ -21,6 +21,7 @@ public:
 	~FinalPermutationSolver();
 private:
 	std::vector<Position> findYellowEdgePositions();
+	bool comeBackToDefaultCubePosition();
 
 	std::queue<std::shared_ptr<IRotation>>& m_rotates;
 	std::stack<std::shared_ptr<IRotation>>& m_historyRrotates;
